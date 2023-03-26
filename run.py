@@ -1,3 +1,4 @@
+import random
 from prettytable import PrettyTable
 
 print("-----------------------")
@@ -33,3 +34,30 @@ def score_table():
     print(game_table)
 
 score_table()
+
+def roll_dice(num_dice):
+    """
+    Rolls dices and returns a list of their values
+    """
+    dice = [random.randint(1, 6) for i in range(num_dice)]
+    return dice
+
+
+def user_dices():
+    """
+    Allows the user to roll the dice 3 times and choose which dice to keep
+    """
+    num_dice = 5
+    user_dice = roll_dice(num_dice)
+    print("Your dices:", user_dice)
+    for i in range(2):
+        keep = input("Which dices would you like to keep? (e.g. 1,3,5)")
+        keep_dice = [int(k) for k in keep.split(",")]
+        print("keep_dice", keep_dice)
+        user_dice = [user_dice[k-1] for k in keep_dice] + roll_dice(num_dice - len(keep_dice))
+        print("Your dices:", user_dice)
+    
+    print("Your Final Dices:", user_dice)
+    return user_dice
+
+user_dices()
