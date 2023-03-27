@@ -1,5 +1,5 @@
 import random
-from prettytable import PrettyTable
+#from prettytable import PrettyTable
 
 print("-----------------------")
 print("Welcome to Yahtzee Game")
@@ -33,7 +33,7 @@ def score_table():
 
     print(game_table)
 
-score_table()
+#score_table()
 
 def roll_dice(num_dice):
     """
@@ -51,12 +51,18 @@ def user_dices():
     user_dice = roll_dice(num_dice)
     print("Your dices:", user_dice)
     for i in range(2):
-        keep = input("Which dices would you like to keep? (e.g. 1,3,5)")
-        keep_dice = [int(k) for k in keep.split(",")]
-        print("keep_dice", keep_dice)
-        user_dice = [user_dice[k-1] for k in keep_dice] + roll_dice(num_dice - len(keep_dice))
-        print("Your dices:", user_dice)
-    
+        while True:
+            try:
+                keep = input("Which dices would you like to keep? (e.g. 1,3,5)")
+                keep_dice = [int(k) for k in keep.split(",")]
+                if len(keep_dice) != len(set(keep_dice)):
+                       raise ValueError("Error: You cannot choose the same dice more than once.")
+                user_dice = [user_dice[k-1] for k in keep_dice] + roll_dice(num_dice - len(keep_dice))            
+                print("keep_dice", keep_dice)
+                print("Your dices:", user_dice)
+                break
+            except ValueError as e:
+                print(e)
     print("Your Final Dices:", user_dice)
     return user_dice
 
