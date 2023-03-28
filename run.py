@@ -62,7 +62,7 @@ def user_dices():
                 print("Your dices:", user_dice)
                 break
             except ValueError as e:
-                print(e)
+                print("Please input only numeric values separated by commas.")
     print("Your Final Dices:", user_dice)
     return user_dice
 
