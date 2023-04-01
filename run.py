@@ -56,13 +56,18 @@ def user_dices():
                 keep = input("Which dices would you like to keep? (e.g. 1,3,5)")
                 keep_dice = [int(k) for k in keep.split(",")]
                 if len(keep_dice) != len(set(keep_dice)):
-                       raise ValueError("Error: You cannot choose the same dice more than once.")
+                    raise ValueError("You cannot choose the same dice more than once. Please try again.")
+                if not all(0 < k <= num_dice for k in keep_dice):
+                    raise ValueError("Please choose only valid dice numbers. Please try again.")
                 user_dice = [user_dice[k-1] for k in keep_dice] + roll_dice(num_dice - len(keep_dice))            
                 print("keep_dice", keep_dice)
                 print("Your dices:", user_dice)
                 break
             except ValueError as e:
-                print("Please input only numeric values separated by commas.")
+                if str(e).startswith("invalid literal for int() with base 10"):
+                    print("Error: Please input only numeric values separated by commas. Please try again.")
+                else:
+                    print("Error:", str(e))
     print("Your Final Dices:", user_dice)
     return user_dice
 
