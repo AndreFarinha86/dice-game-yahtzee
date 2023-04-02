@@ -1,5 +1,5 @@
 import random
-#from prettytable import PrettyTable
+from prettytable import PrettyTable
 
 print("-----------------------")
 print("Welcome to Yahtzee Game")
@@ -33,7 +33,6 @@ def score_table():
 
     print(game_table)
 
-#score_table()
 
 def roll_dice(num_dice):
     """
@@ -53,30 +52,28 @@ def user_dices():
     for i in range(2):
         while True:
             try:
-                keep = input("Which dices would you like to keep? (e.g. 1,3,5 or none) then press Enter")
+                keep = input("Which dices would you like to keep? (e.g. 1,3,5 or none) then press Enter\n")
                 if keep == "":
                     user_dice = roll_dice(num_dice)
                     print("Your dices:", user_dice)
                     break
                 keep_dice = [int(k) for k in keep.split(",")]
                 if len(keep_dice) != len(set(keep_dice)):
-                    raise ValueError("You cannot choose the same dice more than once. Please try again.")
+                    raise ValueError("You cannot choose the same dice more than once. Please try again.\n")
                 if not all(0 < k <= num_dice for k in keep_dice):
-                    raise ValueError("Please choose only valid dice numbers between 1 and 5 separated by commas. Please try again.")
+                    raise ValueError("Please choose only valid dice numbers between 1 and 5 separated by commas. Please try again.\n")
                 user_dice = [user_dice[k-1] for k in keep_dice] + roll_dice(num_dice - len(keep_dice))            
                 print("keep_dice", keep_dice)
-                print("Your dices:", user_dice)
+                print("Your dices:", user_dice,"\n")
                 break
 
             except ValueError as e:
                 if str(e).startswith("invalid literal for int() with base 10"):
-                    print("Error: Please input only numeric values separated by commas. Please try again.")
+                    print("Error: Please input only numeric values separated by commas. Please try again.\n")
                 else:
-                    print("Error:", str(e))
-    print("Your Final Dices:", user_dice)
+                    print("Error:", str(e), "\n")
+    print("Your Final Dices:", user_dice, "\n")
     return user_dice
-
-user_dice = user_dices()
 
 def user_choice():
     """
@@ -84,15 +81,15 @@ def user_choice():
     """
     while True:
         try:
-            choice = int(input("Which Category would you like to choose? (choose only one value from 1 to 13)"))
+            choice = int(input("Which Category would you like to choose? (choose only one value from 1 to 13)\n"))
             if not 1 <= choice <= 13:
-                raise ValueError("Please choose a number between 1 and 13. Please try again.")
+                raise ValueError("Please choose a number between 1 and 13. Please try again.\n")
             break
         except ValueError as e:
             if str(e).startswith("invalid literal for int() with base 10"):
-                print("Error: Please input only numeric values between 1 and 13. Please try again.")
+                print("Error: Please input only numeric values between 1 and 13. Please try again.\n")
             else:
-                print("Error:", str(e))
+                print("Error:", str(e), "\n")
             
     if choice == 1:
         category = "Ones"
@@ -121,7 +118,7 @@ def user_choice():
     elif choice == 13:
         category = "Chance"
 
-    print(category)
+    print("You chose:", category, "\n")
     return category
     
 
@@ -181,4 +178,9 @@ def calculate_score(dice):
     return result
 
 
-calculate_score(user_dice)
+def play_game():
+    user_dice = user_dices()
+    calculate_score(user_dice)
+    score_table()
+
+play_game()
