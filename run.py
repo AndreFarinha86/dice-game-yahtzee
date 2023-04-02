@@ -76,7 +76,7 @@ def user_dices():
     print("Your Final Dices:", user_dice)
     return user_dice
 
-user_dices()
+user_dice = user_dices()
 
 def user_choice():
     """
@@ -125,4 +125,60 @@ def user_choice():
     return category
     
 
-user_choice()
+def calculate_score(dice):
+    """
+    Calculates and returns the score for each category based on the given dices
+    """
+    print(dice)
+    category = user_choice()
+    if category == "Ones":
+        result = dice.count(1)
+    elif category == "Twos":
+        result = 2 * dice.count(2)
+    elif category == "Threes":
+        result = 3 * dice.count(3)
+    elif category == "Fours":
+        result = 4 * dice.count(4)
+    elif category == "Fives":
+        result = 5 * dice.count(5)
+    elif category == "Sixes":
+        result = 6 * dice.count(6)
+    elif category == "Three of a Kind":
+        if len(set(dice)) <= 3:
+            result = sum(dice)
+        else:
+            result = 0
+    elif category == "Four of a Kind":
+        if len(set(dice)) <= 2:
+           result = sum(dice)
+        else:
+            result = 0
+    elif category == "Full House":
+        if len(set(dice)) == 2 and (dice.count(dice[0]) == 2 or dice.count(dice[0]) == 3):
+            result = 25
+        else:
+            result = 0
+    elif category == "Small Straight": 
+        if {1, 2, 3, 4}.issubset(set(dice)) or {2, 3, 4, 5}.issubset(set(dice)) or {3, 4, 5, 6}.issubset(set(dice)):
+            result = 30
+        else:
+            result = 0
+    elif category == "Large Straight":
+        if set(dice) == {1,2,3,4,5} or set(dice) == {2,3,4,5,6}:
+            result = 40
+        else:
+            result = 0
+    elif category == "Yahtzee":
+        if len(set(dice)) == 1:
+            result = 50
+        else:
+            result = 0
+    elif category == "Chance":
+        result = sum(dice)
+    else:
+        result = 0
+    print(result)
+    return result
+
+
+calculate_score(user_dice)
