@@ -179,6 +179,9 @@ def calculate_score(dice):
 
 
 def play_game():
+    """
+    Run all program functions.
+    """
     user_dice = user_dices()
     calculate_score(user_dice)
     score_table()
