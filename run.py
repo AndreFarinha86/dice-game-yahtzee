@@ -77,3 +77,52 @@ def user_dices():
     return user_dice
 
 user_dices()
+
+def user_choice():
+    """
+    Allows the user to choose the desired category
+    """
+    while True:
+        try:
+            choice = int(input("Which Category would you like to choose? (choose only one value from 1 to 13)"))
+            if not 1 <= choice <= 13:
+                raise ValueError("Please choose a number between 1 and 13. Please try again.")
+            break
+        except ValueError as e:
+            if str(e).startswith("invalid literal for int() with base 10"):
+                print("Error: Please input only numeric values between 1 and 13. Please try again.")
+            else:
+                print("Error:", str(e))
+            
+    if choice == 1:
+        category = "Ones"
+    elif choice == 2:
+        category = "Twos"
+    elif choice == 3:
+        category = "Threes"
+    elif choice == 4:
+        category = "Fours"
+    elif choice == 5:
+        category = "Fives"
+    elif choice == 6:
+        category = "Sixes"
+    elif choice == 7:
+        category = "Three of a Kind"
+    elif choice == 8:
+        category = "Four of a Kind"
+    elif choice == 9:
+        category = "Full House"
+    elif choice == 10:
+        category = "Small Straight"
+    elif choice == 11:
+        category = "Large Straight"
+    elif choice == 12:
+        category = "Yahtzee"
+    elif choice == 13:
+        category = "Chance"
+
+    print(category)
+    return category
+    
+
+user_choice()
