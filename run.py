@@ -53,7 +53,11 @@ def user_dices():
     for i in range(2):
         while True:
             try:
-                keep = input("Which dices would you like to keep? (e.g. 1,3,5)")
+                keep = input("Which dices would you like to keep? (e.g. 1,3,5 or none) then press Enter")
+                if keep == "":
+                    user_dice = roll_dice(num_dice)
+                    print("Your dices:", user_dice)
+                    break
                 keep_dice = [int(k) for k in keep.split(",")]
                 if len(keep_dice) != len(set(keep_dice)):
                     raise ValueError("You cannot choose the same dice more than once. Please try again.")
