@@ -1,5 +1,6 @@
 import random
-from prettytable import PrettyTable
+from prettytable import PrettyTable # import prettytable package to print a table
+from tabulate import tabulate # import tabulate package to print a table
 
 print("-----------------------")
 print("Welcome to Yahtzee Game")
@@ -86,7 +87,7 @@ def computer_dices():
     return computer_dice
 
 
-def user_choice():
+def user_choice(dice):
     """
     Allows the user to choose the desired category
     """
@@ -129,16 +130,15 @@ def user_choice():
     elif choice == 13:
         category = "Chance"
 
-    print("You chose:", category, "\n")
+    print("You chose:", category)
+    print("With score:", calculate_score(dice, category),"\n")
     return category
     
 
-def calculate_score(dice):
+def calculate_score(dice, category):
     """
     Calculates and returns the score for each category based on the given dices
     """
-    print(dice)
-    category = user_choice()
     if category == "Ones":
         result = dice.count(1)
     elif category == "Twos":
@@ -185,8 +185,21 @@ def calculate_score(dice):
         result = sum(dice)
     else:
         result = 0
-    print(result)
     return result
+
+
+def display_score(dice):
+    """
+    Display all possible non-null scores
+    """
+    categories = ["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight", "Large Straight", "Yahtzee", "Chance"]
+    scores = []
+    for category in categories:
+        score = calculate_score(dice, category)
+        if score != 0:
+            scores.append([category, score])
+    if scores:
+        print(tabulate(scores, headers=["Category", "Score"]),"\n")
 
 
 def play_game():
@@ -194,6 +207,8 @@ def play_game():
     Run all program functions.
     """
     user_dice = user_dices()
+    display_score(user_dice)
+    user_choice(user_dice)
     computer_dice = computer_dices()
     #calculate_score(user_dice)
     #score_table()
