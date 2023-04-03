@@ -75,6 +75,17 @@ def user_dices():
     print("Your Final Dices:", user_dice, "\n")
     return user_dice
 
+
+def computer_dices():
+    """
+    Calculates and returns the computer dices
+    """
+    num_dice = 5
+    computer_dice = roll_dice(num_dice)
+    print("Computer dices:", computer_dice)
+    return computer_dice
+
+
 def user_choice():
     """
     Allows the user to choose the desired category
@@ -183,7 +194,8 @@ def play_game():
     Run all program functions.
     """
     user_dice = user_dices()
-    calculate_score(user_dice)
-    score_table()
+    computer_dice = computer_dices()
+    #calculate_score(user_dice)
+    #score_table()
 
 play_game()
