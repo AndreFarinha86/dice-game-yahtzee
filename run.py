@@ -83,7 +83,7 @@ def computer_dices():
     """
     num_dice = 5
     computer_dice = roll_dice(num_dice)
-    print("Computer dices:", computer_dice)
+    print("Computer dices:", computer_dice, "\n")
     return computer_dice
 
 
@@ -133,7 +133,7 @@ def user_choice(dice):
     print("You chose:", category)
     print("With score:", calculate_score(dice, category),"\n")
     return category
-    
+
 
 def calculate_score(dice, category):
     """
@@ -202,6 +202,26 @@ def display_score(dice):
         print(tabulate(scores, headers=["Category", "Score"]),"\n")
 
 
+def computer_choice(dice):
+    """
+    Allows the computer to choose the highest scoring category
+    """
+    categories = ["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight", "Large Straight", "Yahtzee", "Chance"]
+    
+    max_score = -1
+    chosen_category = None
+    
+    for category in categories:
+        score = calculate_score(dice, category)
+        if score > max_score:
+            max_score = score
+            chosen_category = category
+    
+    print("Computer chose:", chosen_category)
+    print("With score:", max_score, "\n")
+    return chosen_category
+
+
 def play_game():
     """
     Run all program functions.
@@ -210,7 +230,7 @@ def play_game():
     display_score(user_dice)
     user_choice(user_dice)
     computer_dice = computer_dices()
-    #calculate_score(user_dice)
-    #score_table()
+    display_score(computer_dice)
+    computer_choice(computer_dice)
 
 play_game()
