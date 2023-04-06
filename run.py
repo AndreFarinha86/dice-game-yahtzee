@@ -6,6 +6,8 @@ print("-----------------------")
 print("Welcome to Yahtzee Game")
 print("-----------------------\n")
 
+categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House", "(10) Small Straight", "(11) Large Straight", "(12) Yahtzee", "(13) Chance"]
+
 def score_table():
     """
     Table that holds the points of the game
@@ -14,21 +16,21 @@ def score_table():
 
     game_table.field_names = ["Categories", "User", "Computer"]
 
-    game_table.add_row(["Ones", 6, 11])
-    game_table.add_row(["Twos", 4, 10])
-    game_table.add_row(["Threes", 7, 13])
-    game_table.add_row(["Fours", 7, 13])
-    game_table.add_row(["Fives", 7, 13])
-    game_table.add_row(["Sixes", 7, 13])
+    game_table.add_row(["(1) Ones", 6, 11])
+    game_table.add_row(["(2) Twos", 4, 10])
+    game_table.add_row(["(3) Threes", 7, 13])
+    game_table.add_row(["(4) Fours", 7, 13])
+    game_table.add_row(["(5) Fives", 7, 13])
+    game_table.add_row(["(6) Sixes", 7, 13])
     game_table.add_row(["UPPER SCORE", 7, 13])
     game_table.add_row(["UPPER BONUS (35)", 7, 13])
-    game_table.add_row(["Three of a Kind", 7, 13])
-    game_table.add_row(["Four of a Kind ", 7, 13])
-    game_table.add_row(["Full House (25)", 7, 13])
-    game_table.add_row(["Small Straight (30)", 7, 13])
-    game_table.add_row(["Large Straight (40)", 7, 13])
-    game_table.add_row(["Yahtzee! (50)", 7, 13])
-    game_table.add_row(["Chance", 7, 13])
+    game_table.add_row(["(7) Three of a Kind", 7, 13])
+    game_table.add_row(["(8) Four of a Kind ", 7, 13])
+    game_table.add_row(["(9) Full House (25)", 7, 13])
+    game_table.add_row(["(10) Small Straight (30)", 7, 13])
+    game_table.add_row(["(11) Large Straight (40)", 7, 13])
+    game_table.add_row(["(12) Yahtzee! (50)", 7, 13])
+    game_table.add_row(["(13) Chance", 7, 13])
     game_table.add_row(["LOWER SCORE", 7, 13])
     game_table.add_row(["TOTAL", 7, 13])
 
@@ -104,31 +106,31 @@ def user_choice(dice):
                 print("Error:", str(e), "\n")
             
     if choice == 1:
-        category = "Ones"
+        category = "(1) Ones"
     elif choice == 2:
-        category = "Twos"
+        category = "(2) Twos"
     elif choice == 3:
-        category = "Threes"
+        category = "(3) Threes"
     elif choice == 4:
-        category = "Fours"
+        category = "(4) Fours"
     elif choice == 5:
-        category = "Fives"
+        category = "(5) Fives"
     elif choice == 6:
-        category = "Sixes"
+        category = "(6) Sixes"
     elif choice == 7:
-        category = "Three of a Kind"
+        category = "(7) Three of a Kind"
     elif choice == 8:
-        category = "Four of a Kind"
+        category = "(8) Four of a Kind"
     elif choice == 9:
-        category = "Full House"
+        category = "(9) Full House"
     elif choice == 10:
-        category = "Small Straight"
+        category = "(10) Small Straight"
     elif choice == 11:
-        category = "Large Straight"
+        category = "(11) Large Straight"
     elif choice == 12:
-        category = "Yahtzee"
+        category = "(12) Yahtzee"
     elif choice == 13:
-        category = "Chance"
+        category = "(13) Chance"
 
     print("You chose:", category)
     print("With score:", calculate_score(dice, category),"\n")
@@ -139,49 +141,49 @@ def calculate_score(dice, category):
     """
     Calculates and returns the score for each category based on the given dices
     """
-    if category == "Ones":
+    if category == "(1) Ones":
         result = dice.count(1)
-    elif category == "Twos":
+    elif category == "(2) Twos":
         result = 2 * dice.count(2)
-    elif category == "Threes":
+    elif category == "(3) Threes":
         result = 3 * dice.count(3)
-    elif category == "Fours":
+    elif category == "(4) Fours":
         result = 4 * dice.count(4)
-    elif category == "Fives":
+    elif category == "(5) Fives":
         result = 5 * dice.count(5)
-    elif category == "Sixes":
+    elif category == "(6) Sixes":
         result = 6 * dice.count(6)
-    elif category == "Three of a Kind":
+    elif category == "(7) Three of a Kind":
         if len(set(dice)) <= 3:
             result = sum(dice)
         else:
             result = 0
-    elif category == "Four of a Kind":
+    elif category == "(8) Four of a Kind":
         if len(set(dice)) <= 2:
            result = sum(dice)
         else:
             result = 0
-    elif category == "Full House":
+    elif category == "(9) Full House":
         if len(set(dice)) == 2 and (dice.count(dice[0]) == 2 or dice.count(dice[0]) == 3):
             result = 25
         else:
             result = 0
-    elif category == "Small Straight": 
+    elif category == "(10) Small Straight": 
         if {1, 2, 3, 4}.issubset(set(dice)) or {2, 3, 4, 5}.issubset(set(dice)) or {3, 4, 5, 6}.issubset(set(dice)):
             result = 30
         else:
             result = 0
-    elif category == "Large Straight":
+    elif category == "(11) Large Straight":
         if set(dice) == {1,2,3,4,5} or set(dice) == {2,3,4,5,6}:
             result = 40
         else:
             result = 0
-    elif category == "Yahtzee":
+    elif category == "(12) Yahtzee":
         if len(set(dice)) == 1:
             result = 50
         else:
             result = 0
-    elif category == "Chance":
+    elif category == "(13) Chance":
         result = sum(dice)
     else:
         result = 0
@@ -192,7 +194,6 @@ def display_score(dice):
     """
     Display all possible non-null scores
     """
-    categories = ["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight", "Large Straight", "Yahtzee", "Chance"]
     scores = []
     for category in categories:
         score = calculate_score(dice, category)
@@ -206,8 +207,6 @@ def computer_choice(dice):
     """
     Allows the computer to choose the highest scoring category
     """
-    categories = ["Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight", "Large Straight", "Yahtzee", "Chance"]
-    
     max_score = -1
     chosen_category = None
     
@@ -226,6 +225,7 @@ def play_game():
     """
     Run all program functions.
     """
+    score_table()
     user_dice = user_dices()
     display_score(user_dice)
     user_choice(user_dice)
