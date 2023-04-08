@@ -10,37 +10,45 @@ print("-----------------------\n")
 categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)", "(10) Small Straight (30)", "(11) Large Straight (40)", "(12) Yahtzee! (50)", "(13) Chance"]
 
 # game_scores dictionary that holds user and computer scores
-game_scores = {"(1) Ones":[0,0], 
-               "(2) Twos":[0,0], 
-               "(3) Threes":[0,0], 
-               "(4) Fours":[0,0], 
-               "(5) Fives":[0,0], 
-               "(6) Sixes":[0,0],
+game_scores = {"(1) Ones":["",""], 
+               "(2) Twos":["",""], 
+               "(3) Threes":["",""], 
+               "(4) Fours":["",""], 
+               "(5) Fives":["",""], 
+               "(6) Sixes":["",""],
                "UPPER SCORE":[0,0],
                "UPPER BONUS (35)":[0,0],
-               "(7) Three of a Kind":[0,0],
-               "(8) Four of a Kind":[0,0], 
-               "(9) Full House (25)":[0,0], 
-               "(10) Small Straight (30)":[0,0], 
-               "(11) Large Straight (40)":[0,0], 
-               "(12) Yahtzee! (50)":[0,0],
-               "(13) Chance":[0,0],
+               "(7) Three of a Kind":["",""],
+               "(8) Four of a Kind":["",""], 
+               "(9) Full House (25)":["",""], 
+               "(10) Small Straight (30)":["",""], 
+               "(11) Large Straight (40)":["",""], 
+               "(12) Yahtzee! (50)":["",""],
+               "(13) Chance":["",""],
                "LOWER SCORE":[0,0],
                "TOTAL":[0,0]
                }
 
 
-def assign_scores(user_category, user_score, computer_category, computer_score):
+def assign_scores(user_category, user_score, computer_category, computer_score, user_dice):
     """
-     Updates the game scores for the user and computer based on the chosen category and scores.
+     Updates the game scores for the user and computer based on the chosen category and scores, and raises an error if user chooses a category already scored.
     """
+    while True:
+        try:
+            if game_scores[user_category][0] != "":
+                raise ValueError("This category has already been scored. Please choose another category.")
+            break
+        except ValueError as e:
+                print("Error:", str(e), "\n")
+                user_category = user_choice(user_dice)
     
     game_scores[user_category][0] = user_score
     game_scores[computer_category][1] = computer_score
     
     
-    upper_score_user = sum(game_scores[key][0] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"])
-    upper_score_computer = sum(game_scores[key][1] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"])
+    upper_score_user = sum(game_scores[key][0] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"] if game_scores[key][0])
+    upper_score_computer = sum(game_scores[key][1] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"] if game_scores[key][1])
 
     upper_bonus_user = 0
     upper_bonus_computer = 0
@@ -51,8 +59,8 @@ def assign_scores(user_category, user_score, computer_category, computer_score):
     if upper_score_computer >= 63:
         game_scores["UPPER BONUS (35)"][1] = 35
         upper_bonus_computer = 35
-    lower_score_user = sum(game_scores[key][0] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"])
-    lower_score_computer = sum(game_scores[key][1] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"])
+    lower_score_user = sum(game_scores[key][0] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"] if game_scores[key][0])
+    lower_score_computer = sum(game_scores[key][1] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"] if game_scores[key][1])
     total_user = upper_score_user + upper_bonus_user + lower_score_user
     total_computer = upper_score_computer + upper_bonus_computer + lower_score_computer
 
@@ -269,17 +277,24 @@ def play_game():
     """
     Run all program functions.
     """
-    user_dice = user_dices()
-    display_score(user_dice)
-    user_category = user_choice(user_dice)
-    user_score = calculate_score(user_dice, user_category)
 
-    computer_dice = computer_dices()
-    display_score(computer_dice)
-    computer_category = computer_choice(computer_dice)
-    computer_score = calculate_score(computer_dice, computer_category)
+    for round_num in range(1, 7):
+        print(f"Round {round_num}")
 
-    game_scores = assign_scores(user_category, user_score, computer_category, computer_score)
-    score_table(game_scores)
+        # User's turn
+        user_dice = user_dices()
+        display_score(user_dice)
+        user_category = user_choice(user_dice)
+        user_score = calculate_score(user_dice, user_category)
+
+        # Computer's turn
+        computer_dice = computer_dices()
+        display_score(computer_dice)
+        computer_category = computer_choice(computer_dice)
+        computer_score = calculate_score(computer_dice, computer_category)
+
+        # Display scores
+        game_scores = assign_scores(user_category, user_score, computer_category, computer_score, user_dice)
+        score_table(game_scores)
 
 play_game()
