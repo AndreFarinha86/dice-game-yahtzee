@@ -7,7 +7,7 @@ print("Welcome to Yahtzee Game")
 print("-----------------------\n")
 
 # list that holds all game categories
-categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House", "(10) Small Straight", "(11) Large Straight", "(12) Yahtzee", "(13) Chance"]
+categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)", "(10) Small Straight (30)", "(11) Large Straight (40)", "(12) Yahtzee! (50)", "(13) Chance"]
 
 # game_scores dictionary that holds user and computer scores
 game_scores = {"(1) Ones":[0,0], 
@@ -30,31 +30,68 @@ game_scores = {"(1) Ones":[0,0],
                }
 
 
-def score_table():
+def assign_scores(user_category, user_score, computer_category, computer_score):
     """
-    Table that holds the points of the game
+     Updates the game scores for the user and computer based on the chosen category and scores.
     """
+    
+    game_scores[user_category][0] = user_score
+    game_scores[computer_category][1] = computer_score
+    
+    
+    upper_score_user = sum(game_scores[key][0] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"])
+    upper_score_computer = sum(game_scores[key][1] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"])
+
+    upper_bonus_user = 0
+    upper_bonus_computer = 0
+
+    if upper_score_user >= 63:
+        game_scores["UPPER BONUS (35)"][0] = 35
+        upper_bonus_user = 35
+    if upper_score_computer >= 63:
+        game_scores["UPPER BONUS (35)"][1] = 35
+        upper_bonus_computer = 35
+    lower_score_user = sum(game_scores[key][0] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"])
+    lower_score_computer = sum(game_scores[key][1] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"])
+    total_user = upper_score_user + upper_bonus_user + lower_score_user
+    total_computer = upper_score_computer + upper_bonus_computer + lower_score_computer
+
+    game_scores["UPPER SCORE"][0] = upper_score_user
+    game_scores["UPPER SCORE"][1] = upper_score_computer
+    game_scores["LOWER SCORE"][0] = lower_score_user
+    game_scores["LOWER SCORE"][1] = lower_score_computer
+    game_scores["TOTAL"][0] = total_user
+    game_scores["TOTAL"][1] = total_computer
+
+    return game_scores
+
+
+def score_table(game_scores):
+    """
+    Table that displays the user and computer game scores
+    """
+
     game_table = PrettyTable()
 
     game_table.field_names = ["Categories", "User", "Computer"]
 
-    game_table.add_row(["(1) Ones", 6, 11])
-    game_table.add_row(["(2) Twos", 4, 10])
-    game_table.add_row(["(3) Threes", 7, 13])
-    game_table.add_row(["(4) Fours", 7, 13])
-    game_table.add_row(["(5) Fives", 7, 13])
-    game_table.add_row(["(6) Sixes", 7, 13])
-    game_table.add_row(["UPPER SCORE", 7, 13])
-    game_table.add_row(["UPPER BONUS (35)", 7, 13])
-    game_table.add_row(["(7) Three of a Kind", 7, 13])
-    game_table.add_row(["(8) Four of a Kind ", 7, 13])
-    game_table.add_row(["(9) Full House (25)", 7, 13])
-    game_table.add_row(["(10) Small Straight (30)", 7, 13])
-    game_table.add_row(["(11) Large Straight (40)", 7, 13])
-    game_table.add_row(["(12) Yahtzee! (50)", 7, 13])
-    game_table.add_row(["(13) Chance", 7, 13])
-    game_table.add_row(["LOWER SCORE", 7, 13])
-    game_table.add_row(["TOTAL", 7, 13])
+    game_table.add_row(["(1) Ones", game_scores["(1) Ones"][0], game_scores["(1) Ones"][1]])
+    game_table.add_row(["(2) Twos", game_scores["(2) Twos"][0], game_scores["(2) Twos"][1]])
+    game_table.add_row(["(3) Threes", game_scores["(3) Threes"][0], game_scores["(3) Threes"][1]])
+    game_table.add_row(["(4) Fours", game_scores["(4) Fours"][0], game_scores["(4) Fours"][1]])
+    game_table.add_row(["(5) Fives", game_scores["(5) Fives"][0], game_scores["(5) Fives"][1]])
+    game_table.add_row(["(6) Sixes", game_scores["(6) Sixes"][0], game_scores["(6) Sixes"][1]])
+    game_table.add_row(["UPPER SCORE", game_scores["UPPER SCORE"][0],game_scores["UPPER SCORE"][1]])
+    game_table.add_row(["UPPER BONUS (35)", game_scores["UPPER BONUS (35)"][0],game_scores["UPPER BONUS (35)"][1]])
+    game_table.add_row(["(7) Three of a Kind", game_scores["(7) Three of a Kind"][0], game_scores["(7) Three of a Kind"][1]])
+    game_table.add_row(["(8) Four of a Kind", game_scores["(8) Four of a Kind"][0], game_scores["(8) Four of a Kind"][1]])
+    game_table.add_row(["(9) Full House (25)", game_scores["(9) Full House (25)"][0], game_scores["(9) Full House (25)"][1]])
+    game_table.add_row(["(10) Small Straight (30)", game_scores["(10) Small Straight (30)"][0], game_scores["(10) Small Straight (30)"][1]])
+    game_table.add_row(["(11) Large Straight (40)", game_scores["(11) Large Straight (40)"][0], game_scores["(11) Large Straight (40)"][1]])
+    game_table.add_row(["(12) Yahtzee! (50)", game_scores["(12) Yahtzee! (50)"][0], game_scores["(12) Yahtzee! (50)"][1]])
+    game_table.add_row(["(13) Chance", game_scores["(13) Chance"][0], game_scores["(13) Chance"][1]])
+    game_table.add_row(["LOWER SCORE",game_scores["LOWER SCORE"][0],game_scores["LOWER SCORE"][1]])
+    game_table.add_row(["TOTAL",game_scores["TOTAL"][0],game_scores["TOTAL"][1]])
 
     print(game_table)
 
@@ -128,35 +165,35 @@ def user_choice(dice):
                 print("Error:", str(e), "\n")
             
     if choice == 1:
-        category = "(1) Ones"
+        user_category = "(1) Ones"
     elif choice == 2:
-        category = "(2) Twos"
+        user_category = "(2) Twos"
     elif choice == 3:
-        category = "(3) Threes"
+        user_category = "(3) Threes"
     elif choice == 4:
-        category = "(4) Fours"
+        user_category = "(4) Fours"
     elif choice == 5:
-        category = "(5) Fives"
+        user_category = "(5) Fives"
     elif choice == 6:
-        category = "(6) Sixes"
+        user_category = "(6) Sixes"
     elif choice == 7:
-        category = "(7) Three of a Kind"
+        user_category = "(7) Three of a Kind"
     elif choice == 8:
-        category = "(8) Four of a Kind"
+        user_category = "(8) Four of a Kind"
     elif choice == 9:
-        category = "(9) Full House"
+        user_category = "(9) Full House (25)"
     elif choice == 10:
-        category = "(10) Small Straight"
+        user_category = "(10) Small Straight (30)"
     elif choice == 11:
-        category = "(11) Large Straight"
+        user_category = "(11) Large Straight (40)"
     elif choice == 12:
-        category = "(12) Yahtzee"
+        user_category = "(12) Yahtzee! (50)"
     elif choice == 13:
-        category = "(13) Chance"
+        user_category = "(13) Chance"
 
-    print("You chose:", category)
-    print("With score:", calculate_score(dice, category),"\n")
-    return category
+    print("You chose:", user_category)
+    print("With score:", calculate_score(dice, user_category),"\n")
+    return user_category
 
 
 def calculate_score(dice, category):
@@ -185,12 +222,12 @@ def calculate_score(dice, category):
            result = sum(dice)
         else:
             result = 0
-    elif category == "(9) Full House":
+    elif category == "(9) Full House (25)":
         if len(set(dice)) == 2 and (dice.count(dice[0]) == 2 or dice.count(dice[0]) == 3):
             result = 25
         else:
             result = 0
-    elif category == "(10) Small Straight": 
+    elif category == "(10) Small Straight (30)": 
         if {1, 2, 3, 4}.issubset(set(dice)) or {2, 3, 4, 5}.issubset(set(dice)) or {3, 4, 5, 6}.issubset(set(dice)):
             result = 30
         else:
@@ -200,7 +237,7 @@ def calculate_score(dice, category):
             result = 40
         else:
             result = 0
-    elif category == "(12) Yahtzee":
+    elif category == "(12) Yahtzee! (50)":
         if len(set(dice)) == 1:
             result = 50
         else:
@@ -229,30 +266,35 @@ def computer_choice(dice):
     """
     Allows the computer to choose the highest scoring category
     """
-    max_score = -1
-    chosen_category = None
+    computer_score = -1
+    computer_category = None
     
     for category in categories:
         score = calculate_score(dice, category)
-        if score > max_score:
-            max_score = score
-            chosen_category = category
+        if score > computer_score:
+           computer_score = score
+           computer_category = category
     
-    print("Computer chose:", chosen_category)
-    print("With score:", max_score, "\n")
-    return chosen_category
+    print("Computer chose:", computer_category)
+    print("With score:", computer_score, "\n")
+    return computer_category
 
 
 def play_game():
     """
     Run all program functions.
     """
-    score_table()
     user_dice = user_dices()
     display_score(user_dice)
-    user_choice(user_dice)
+    user_category = user_choice(user_dice)
+    user_score = calculate_score(user_dice, user_category)
+
     computer_dice = computer_dices()
     display_score(computer_dice)
-    computer_choice(computer_dice)
+    computer_category = computer_choice(computer_dice)
+    computer_score = calculate_score(computer_dice, computer_category)
+
+    game_scores = assign_scores(user_category, user_score, computer_category, computer_score)
+    score_table(game_scores)
 
 play_game()
