@@ -6,7 +6,29 @@ print("-----------------------")
 print("Welcome to Yahtzee Game")
 print("-----------------------\n")
 
+# list that holds all game categories
 categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House", "(10) Small Straight", "(11) Large Straight", "(12) Yahtzee", "(13) Chance"]
+
+# game_scores dictionary that holds user and computer scores
+game_scores = {"(1) Ones":[0,0], 
+               "(2) Twos":[0,0], 
+               "(3) Threes":[0,0], 
+               "(4) Fours":[0,0], 
+               "(5) Fives":[0,0], 
+               "(6) Sixes":[0,0],
+               "UPPER SCORE":[0,0],
+               "UPPER BONUS (35)":[0,0],
+               "(7) Three of a Kind":[0,0],
+               "(8) Four of a Kind":[0,0], 
+               "(9) Full House (25)":[0,0], 
+               "(10) Small Straight (30)":[0,0], 
+               "(11) Large Straight (40)":[0,0], 
+               "(12) Yahtzee! (50)":[0,0],
+               "(13) Chance":[0,0],
+               "LOWER SCORE":[0,0],
+               "TOTAL":[0,0]
+               }
+
 
 def score_table():
     """
