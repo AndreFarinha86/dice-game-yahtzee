@@ -2,9 +2,6 @@ import random
 from prettytable import PrettyTable # import prettytable package to print a table
 from tabulate import tabulate # import tabulate package to print a table
 
-print("-----------------------")
-print("Welcome to Yahtzee Game")
-print("-----------------------\n")
 
 # list that holds all game categories
 categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)", "(10) Small Straight (30)", "(11) Large Straight (40)", "(12) Yahtzee! (50)", "(13) Chance"]
@@ -257,12 +254,14 @@ def display_score(dice):
 
 def computer_choice(dice):
     """
-    Allows the computer to choose the highest scoring category
+    Generates a computer score based on the unscored categories with the highest expected score
     """
     computer_score = -1
     computer_category = None
+
+    unscored_categories = [category for category in categories if game_scores[category][1] == ""]
     
-    for category in categories:
+    for category in unscored_categories:
         score = calculate_score(dice, category)
         if score > computer_score:
            computer_score = score
@@ -277,8 +276,11 @@ def play_game():
     """
     Run all program functions.
     """
+    print("-----------------------")
+    print("Welcome to Yahtzee Game")
+    print("-----------------------\n")
 
-    for round_num in range(1, 7):
+    for round_num in range(1, 14):
         print(f"Round {round_num}")
 
         # User's turn
