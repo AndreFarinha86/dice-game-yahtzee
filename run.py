@@ -75,23 +75,8 @@ def score_table(game_scores):
 
     game_table.field_names = ["Categories", "User", "Computer"]
 
-    game_table.add_row(["(1) Ones", game_scores["(1) Ones"][0], game_scores["(1) Ones"][1]])
-    game_table.add_row(["(2) Twos", game_scores["(2) Twos"][0], game_scores["(2) Twos"][1]])
-    game_table.add_row(["(3) Threes", game_scores["(3) Threes"][0], game_scores["(3) Threes"][1]])
-    game_table.add_row(["(4) Fours", game_scores["(4) Fours"][0], game_scores["(4) Fours"][1]])
-    game_table.add_row(["(5) Fives", game_scores["(5) Fives"][0], game_scores["(5) Fives"][1]])
-    game_table.add_row(["(6) Sixes", game_scores["(6) Sixes"][0], game_scores["(6) Sixes"][1]])
-    game_table.add_row(["UPPER SCORE", game_scores["UPPER SCORE"][0],game_scores["UPPER SCORE"][1]])
-    game_table.add_row(["UPPER BONUS (35)", game_scores["UPPER BONUS (35)"][0],game_scores["UPPER BONUS (35)"][1]])
-    game_table.add_row(["(7) Three of a Kind", game_scores["(7) Three of a Kind"][0], game_scores["(7) Three of a Kind"][1]])
-    game_table.add_row(["(8) Four of a Kind", game_scores["(8) Four of a Kind"][0], game_scores["(8) Four of a Kind"][1]])
-    game_table.add_row(["(9) Full House (25)", game_scores["(9) Full House (25)"][0], game_scores["(9) Full House (25)"][1]])
-    game_table.add_row(["(10) Small Straight (30)", game_scores["(10) Small Straight (30)"][0], game_scores["(10) Small Straight (30)"][1]])
-    game_table.add_row(["(11) Large Straight (40)", game_scores["(11) Large Straight (40)"][0], game_scores["(11) Large Straight (40)"][1]])
-    game_table.add_row(["(12) Yahtzee! (50)", game_scores["(12) Yahtzee! (50)"][0], game_scores["(12) Yahtzee! (50)"][1]])
-    game_table.add_row(["(13) Chance", game_scores["(13) Chance"][0], game_scores["(13) Chance"][1]])
-    game_table.add_row(["LOWER SCORE",game_scores["LOWER SCORE"][0],game_scores["LOWER SCORE"][1]])
-    game_table.add_row(["TOTAL",game_scores["TOTAL"][0],game_scores["TOTAL"][1]])
+    for category, scores in game_scores.items():
+        game_table.add_row([category, scores[0], scores[1]])
 
     print(game_table)
 
