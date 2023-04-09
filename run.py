@@ -31,14 +31,6 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
     """
      Updates the game scores for the user and computer based on the chosen category and scores, and raises an error if user chooses a category already scored.
     """
-    while True:
-        try:
-            if game_scores[user_category][0] != "":
-                raise ValueError("This category has already been scored. Please choose another category.")
-            break
-        except ValueError as e:
-                print("Error:", str(e), "\n")
-                user_category = user_choice(user_dice)
     
     game_scores[user_category][0] = user_score
     game_scores[computer_category][1] = computer_score
@@ -186,6 +178,25 @@ def user_choice(dice):
     return user_category
 
 
+def user_category_check(dice):
+    """
+    Checks if the chosen category has already been scored.
+    """
+    
+    user_category = user_choice(dice)
+    
+    while True:
+        try:
+            if game_scores[user_category][0] != "":
+                raise ValueError("This category has already been scored. Please choose another category.")
+            break
+        except ValueError as e:
+                print("Error:", str(e), "\n")
+                user_category = user_choice(dice)
+    
+    return user_category
+
+
 def calculate_score(dice, category):
     """
     Calculates and returns the score for each category based on the given dices
@@ -286,7 +297,7 @@ def play_game():
         # User's turn
         user_dice = user_dices()
         display_score(user_dice)
-        user_category = user_choice(user_dice)
+        user_category = user_category_check(user_dice)
         user_score = calculate_score(user_dice, user_category)
 
         # Computer's turn
