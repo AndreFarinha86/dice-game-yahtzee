@@ -29,7 +29,7 @@ game_scores = {"(1) Ones":["",""],
 
 def assign_scores(user_category, user_score, computer_category, computer_score, user_dice):
     """
-     Updates the game scores for the user and computer based on the chosen category and scores, and raises an error if user chooses a category already scored.
+     Updates the game scores for the user and computer based on the chosen category and scores.
     """
     
     game_scores[user_category][0] = user_score
@@ -136,7 +136,7 @@ def user_choice(dice):
     """
     while True:
         try:
-            choice = int(input("Which Category would you like to choose? (choose only one value from 1 to 13)\n"))
+            choice = int(input("Which Category would you like to choose? (choose only one value from 1 to 13 for unscored categories!)\n"))
             if not 1 <= choice <= 13:
                 raise ValueError("Please choose a number between 1 and 13. Please try again.\n")
             break
@@ -254,13 +254,18 @@ def display_score(dice):
     """
     Display all possible non-null scores
     """
+    unscored_categories = [category for category in categories if game_scores[category][0] == ""]
+
     scores = []
-    for category in categories:
+    for category in unscored_categories:
         score = calculate_score(dice, category)
         if score != 0:
             scores.append([category, score])
     if scores:
+        print("Possible Scores:")
         print(tabulate(scores, headers=["Category", "Score"]),"\n")
+    else:
+        print("All possible scores are 0, please choose one of the unscored categories!\n")
 
 
 def computer_choice(dice):
@@ -321,7 +326,6 @@ def play_game():
         # Computer's turn
         print("It's the computer's turn.\n")
         computer_dice = computer_dices()
-        display_score(computer_dice)
         computer_category = computer_choice(computer_dice)
         computer_score = calculate_score(computer_dice, computer_category)
 
