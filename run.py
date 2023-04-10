@@ -283,6 +283,22 @@ def computer_choice(dice):
     return computer_category
 
 
+def end_game():
+    """
+    Ends the game by printing the final scores and a message indicating the winner.
+    """
+    print("Game over!\n")
+    score_table(game_scores)
+    computer_final_score = game_scores["TOTAL"][1]
+    user_final_score = game_scores["TOTAL"][0]
+    if user_final_score > computer_final_score:
+        print(f"\nCongratulations! You won! with score {user_final_score}\n")
+    elif user_final_score < computer_final_score:
+        print(f"\nComputer won with score {computer_final_score}. Better luck next time!\n")
+    else:
+        print("It's a tie!")
+
+
 def play_game():
     """
     Run all program functions.
@@ -291,16 +307,19 @@ def play_game():
     print("Welcome to Yahtzee Game")
     print("-----------------------\n")
 
-    for round_num in range(1, 14):
-        print(f"Round {round_num}")
+
+    for round_num in range(len(categories)):
+        print(f"Round {round_num + 1}\n")
 
         # User's turn
+        print("It's user turn!\n")
         user_dice = user_dices()
         display_score(user_dice)
         user_category = user_category_check(user_dice)
         user_score = calculate_score(user_dice, user_category)
 
         # Computer's turn
+        print("It's the computer's turn.\n")
         computer_dice = computer_dices()
         display_score(computer_dice)
         computer_category = computer_choice(computer_dice)
@@ -309,5 +328,8 @@ def play_game():
         # Display scores
         game_scores = assign_scores(user_category, user_score, computer_category, computer_score, user_dice)
         score_table(game_scores)
+        print("\n")
+
+    end_game()
 
 play_game()
