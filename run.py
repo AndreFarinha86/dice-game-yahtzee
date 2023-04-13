@@ -27,6 +27,14 @@ game_scores = {"(1) Ones":["",""],
                }
 
 
+def get_user_name():
+    """
+    Allows the user to input their name and stores it in the 'user_name' variable.
+    """
+    user_name = input("Please enter your name: ")
+    return user_name
+
+
 def assign_scores(user_category, user_score, computer_category, computer_score, user_dice):
     """
      Updates the game scores for the user and computer based on the chosen category and scores.
@@ -63,14 +71,14 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
     return game_scores
 
 
-def score_table(game_scores):
+def score_table(game_scores, user):
     """
     Table that displays the user and computer game scores
     """
 
     game_table = PrettyTable()
 
-    game_table.field_names = ["Categories", "User", "Computer"]
+    game_table.field_names = ["Categories", f"{user}", "Computer"]
 
     for category, scores in game_scores.items():
         game_table.add_row([category, scores[0], scores[1]])
@@ -312,12 +320,14 @@ def play_game():
     print("Welcome to Yahtzee Game")
     print("-----------------------\n")
 
+    user = get_user_name()
+
 
     for round_num in range(len(categories)):
         print(f"Round {round_num + 1}\n")
 
         # User's turn
-        print("It's user turn!\n")
+        print(f"It's {user} turn!\n")
         user_dice = user_dices()
         display_score(user_dice)
         user_category = user_category_check(user_dice)
@@ -331,7 +341,7 @@ def play_game():
 
         # Display scores
         game_scores = assign_scores(user_category, user_score, computer_category, computer_score, user_dice)
-        score_table(game_scores)
+        score_table(game_scores, user)
         print("\n")
 
     end_game()
