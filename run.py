@@ -1,7 +1,7 @@
 import random
 from prettytable import PrettyTable # import prettytable package to print a table
 from tabulate import tabulate # import tabulate package to print a table
-
+import os
 
 # list that holds all game categories
 categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)", "(10) Small Straight (30)", "(11) Large Straight (40)", "(12) Yahtzee! (50)", "(13) Chance"]
@@ -71,14 +71,21 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
     return game_scores
 
 
-def score_table(game_scores, user):
+def clear_terminal():
+    """Clears the terminal screen."""
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def score_table(game_scores):
     """
     Table that displays the user and computer game scores
     """
 
+    clear_terminal()
+
     game_table = PrettyTable()
 
-    game_table.field_names = ["Categories", f"{user}", "Computer"]
+    game_table.field_names = ["Categories", "user", "Computer"]
 
     for category, scores in game_scores.items():
         game_table.add_row([category, scores[0], scores[1]])
@@ -326,6 +333,12 @@ def play_game():
     for round_num in range(len(categories)):
         print(f"Round {round_num + 1}\n")
 
+        # Computer's turn
+        print("It's the computer's turn.\n")
+        computer_dice = computer_dices()
+        computer_category = computer_choice(computer_dice)
+        computer_score = calculate_score(computer_dice, computer_category)
+
         # User's turn
         print(f"It's {user} turn!\n")
         user_dice = user_dices()
@@ -333,15 +346,9 @@ def play_game():
         user_category = user_category_check(user_dice)
         user_score = calculate_score(user_dice, user_category)
 
-        # Computer's turn
-        print("It's the computer's turn.\n")
-        computer_dice = computer_dices()
-        computer_category = computer_choice(computer_dice)
-        computer_score = calculate_score(computer_dice, computer_category)
-
         # Display scores
         game_scores = assign_scores(user_category, user_score, computer_category, computer_score, user_dice)
-        score_table(game_scores, user)
+        score_table(game_scores)
         print("\n")
 
     end_game()
