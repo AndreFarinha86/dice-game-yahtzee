@@ -1,7 +1,6 @@
 import random
 from prettytable import PrettyTable # import prettytable package to print a table
 from tabulate import tabulate # import tabulate package to print a table
-import os
 
 # list that holds all game categories
 categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)", "(10) Small Straight (30)", "(11) Large Straight (40)", "(12) Yahtzee! (50)", "(13) Chance"]
@@ -73,7 +72,7 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
 
 def clear_terminal():
     """Clears the terminal screen."""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    print("\033c", end="")
 
 
 def score_table(game_scores):
