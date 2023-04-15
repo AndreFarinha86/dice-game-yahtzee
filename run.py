@@ -150,7 +150,7 @@ def clear_terminal():
     game_title()
 
 
-def score_table(game_scores):
+def score_table(game_scores, user):
     """
     Table that displays the user and computer game scores
     """
@@ -159,7 +159,7 @@ def score_table(game_scores):
 
     game_table = PrettyTable()
 
-    game_table.field_names = ["Categories", "user", "Computer"]
+    game_table.field_names = ["Categories", f"{user}", "Computer"]
 
     for category, scores in game_scores.items():
         game_table.add_row([category, scores[0], scores[1]])
@@ -377,16 +377,16 @@ def computer_choice(dice):
     return computer_category
 
 
-def end_game():
+def end_game(user):
     """
     Ends the game by printing the final scores and a message indicating the winner.
     """
+
     print("Game over!\n")
-    score_table(game_scores)
     computer_final_score = game_scores["TOTAL"][1]
     user_final_score = game_scores["TOTAL"][0]
     if user_final_score > computer_final_score:
-        print(f"\nCongratulations! You won! with score {user_final_score}\n")
+        print(f"\nCongratulations {user}! You won! with score {user_final_score}\n")
     elif user_final_score < computer_final_score:
         print(f"\nComputer won with score {computer_final_score}. Better luck next time!\n")
     else:
@@ -424,10 +424,10 @@ def play_game():
 
         # Display scores
         game_scores = assign_scores(user_category, user_score, computer_category, computer_score, user_dice)
-        score_table(game_scores)
+        score_table(game_scores, user)
         print("\n")
 
-    end_game()
+    end_game(user)
     restart_game()
 
 play_game()
