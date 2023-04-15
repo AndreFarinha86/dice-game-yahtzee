@@ -25,6 +25,46 @@ game_scores = {"(1) Ones":["",""],
                "TOTAL":[0,0]
                }
 
+def game_rules():
+    """
+    Allows user to view game rules if desired
+    """
+    while True:
+        try:
+            rules = input("Would you like to see the game rules? Choose (y/n) and press enter:")
+            if rules.lower() not in ['y', 'n']:
+                raise ValueError("Please choose only y or n. Please try again.\n")
+            break
+
+        except ValueError as e:
+                print("Error:", str(e), "\n")
+
+    if rules.lower() == "y":
+        print("Objective:")
+        print("Score as many points as possible by rolling dice to reach the 13 combinations predefined in the game.\n")
+        print("Game Play:")
+        print("Dice can be rolled up to three times each in a turn to make one of the possible scoring combinations.")
+        print("The game consists of rounds during which the player chooses which scoring combination to use in that round.")
+        print("Once a combination is used in the game, it cannot be used again.")
+        print("Player can select dice after first or second roll, and must score after third roll.")
+        print("After the first and second roll player can save the dice by choosing each dice (1 to 5) that desires to keep") 
+        print("and which ones want to throw in the spots.") 
+        print("Dice that are set aside from the previous rolls can be taken out and re-rolled again.") 
+        print("The game ends when all categories have been scored.") 
+        print("The winner is the one who scores the most points.\n") 
+        print("Categories\combinations:")
+        print("There are thirteen predefined categories in Yahtzee game, each with its own unique scoring rules:")
+        print("(1) Ones to (6) sixes: It scores the sum of these specific dice number only.")
+        print("Three and Four of a kind: It scores the sum of all the dice.")
+        print("Full house: Three of a kind & a pair|25 points.")
+        print("small straight: 4 consecutive dice|30 points")
+        print("Large straight: 5 consecutive dice|40 points")
+        print("Yatzy: 5 dice with same number|50 points")
+        print("Chance: Scores the sum of all dice\n")
+        print("GOOD LUCK!\n")
+        input("Press Enter to leave game rules.")
+        game_rules()
+
 
 def get_user_name():
     """
@@ -73,7 +113,6 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
 def clear_terminal():
     """Clears the terminal screen."""
     print("\033c", end="")
-
 
 def score_table(game_scores):
     """
@@ -325,6 +364,8 @@ def play_game():
     print("-----------------------")
     print("Welcome to Yahtzee Game")
     print("-----------------------\n")
+
+    game_rules()
 
     user = get_user_name()
 
