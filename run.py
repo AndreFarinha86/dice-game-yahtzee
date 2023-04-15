@@ -94,7 +94,17 @@ def get_user_name():
     """
     Allows the user to input their name and stores it in the 'user_name' variable.
     """
-    user_name = input("Please enter your name: ")
+    while True:
+        try:
+            user_name = input("Please enter your name: ")
+            print("")
+            if user_name == "":
+                raise ValueError("Please add some text. Please try again.")
+            break
+
+        except ValueError as e:
+                print("Error:", str(e), "\n")
+
     return user_name
 
 
