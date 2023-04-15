@@ -58,7 +58,7 @@ game_scores = {"(1) Ones":["",""],
 
 def game_title():
     """
-    Prints game title when called
+    Prints game title when is called
     """
     print(textstyle.YELLOW + "-----------------------" + textstyle.ENDC)
     print(textstyle.BOLD + textstyle.ITALIC + textstyle.YELLOW + "Welcome to Yahtzee Game" + textstyle.ENDC)
@@ -69,18 +69,27 @@ def game_rules():
     """
     Allows user to view game rules if desired
     """
+    # Loop until the user inputs a valid choice of whether to view the game rules
     while True:
         try:
+            # Check if the user input a valid choice of 'y' or 'n'
             rules = input("Would you like to see the game rules? Choose (y/n) then press Enter:")
             print("")
+
+            # If the input is valid, break out of the loop
             if rules.lower() not in ['y', 'n']:
                 raise ValueError("Please choose only y or n. Please try again.")
+            
+            # If the input is valid, break out of the loop
             break
 
         except ValueError as e:
-                print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
+            # Print the error message in red
+            print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
 
+    # If the user chose to view the game rules
     if rules.lower() == "y":
+        # Print the game's rules
         print("Objective:")
         print("Score as many points as possible by rolling dice to reach the 13 combinations predefined in the game.\n")
         print("Game Play:")
@@ -114,14 +123,17 @@ def get_user_name():
     """
     while True:
         try:
+            # Prompt user to input their name
             user_name = input("Please enter your name: ")
             print("")
+            # Raise an exception if user doesn't enter anything
             if user_name == "":
                 raise ValueError("Please add some text. Please try again.")
             break
 
         except ValueError as e:
-                print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
+            # Print error message if there is an exception
+            print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
 
     return user_name
 
@@ -130,14 +142,16 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
     """
      Updates the game scores for the user and computer based on the chosen category and scores.
     """
-    
+
+    # Update game scores for user and computer based on chosen category and scores
     game_scores[user_category][0] = user_score
     game_scores[computer_category][1] = computer_score
     
-    
+    # Calculate upper score for user and computer
     upper_score_user = sum(game_scores[key][0] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"] if game_scores[key][0])
     upper_score_computer = sum(game_scores[key][1] for key in ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes"] if game_scores[key][1])
 
+    # Calculate upper bonus for user and computer
     upper_bonus_user = 0
     upper_bonus_computer = 0
 
@@ -147,11 +161,16 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
     if upper_score_computer >= 63:
         game_scores["UPPER BONUS (35)"][1] = 35
         upper_bonus_computer = 35
+    
+    # Calculate lower score for user and computer
     lower_score_user = sum(game_scores[key][0] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"] if game_scores[key][0])
     lower_score_computer = sum(game_scores[key][1] for key in ["(7) Three of a Kind","(8) Four of a Kind","(9) Full House (25)","(10) Small Straight (30)","(11) Large Straight (40)","(12) Yahtzee! (50)","(13) Chance"] if game_scores[key][1])
+    
+    # Calculate total score for user and computer
     total_user = upper_score_user + upper_bonus_user + lower_score_user
     total_computer = upper_score_computer + upper_bonus_computer + lower_score_computer
 
+    # Update game scores with calculated values
     game_scores["UPPER SCORE"][0] = upper_score_user
     game_scores["UPPER SCORE"][1] = upper_score_computer
     game_scores["LOWER SCORE"][0] = lower_score_user
@@ -298,8 +317,8 @@ def user_category_check(dice):
                 raise ValueError("This category has already been scored. Please choose another category.")
             break
         except ValueError as e:
-                print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
-                user_category = user_choice(dice)
+            print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
+            user_category = user_choice(dice)
     
     return user_category
 
@@ -398,7 +417,6 @@ def end_game(user):
     """
     Ends the game by printing the final scores and a message indicating the winner.
     """
-
     print(textstyle.BOLD + textstyle.GREENBG + "Game over!" + textstyle.ENDC,"\n")
     computer_final_score = game_scores["TOTAL"][1]
     user_final_score = game_scores["TOTAL"][0]
@@ -411,6 +429,9 @@ def end_game(user):
 
 
 def restart_game():
+    """
+    Restart the game when previous game has finished.
+    """
     input("Press Enter to restart game.")
     play_game()
 
