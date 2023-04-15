@@ -51,6 +51,7 @@ def game_rules():
     while True:
         try:
             rules = input("Would you like to see the game rules? Choose (y/n) and press enter:")
+            print("")
             if rules.lower() not in ['y', 'n']:
                 raise ValueError("Please choose only y or n. Please try again.\n")
             break
@@ -82,6 +83,7 @@ def game_rules():
         print("Chance: Scores the sum of all dice\n")
         print("GOOD LUCK!\n")
         input("Press Enter to leave game rules.")
+        clear_terminal()
         game_rules()
 
 
