@@ -76,13 +76,14 @@ def game_rules():
     while True:
         try:
             # Check if the user input a valid choice of 'y' or 'n'
-            rules = input("Would you like to see the game rules? Choose(y/n)"
-                          "then press Enter: ")
+            rules = input("Would you like to see the game rules? Choose"
+                          " (y/n) then press Enter: ")
             print("")
 
             # If the input is valid, break out of the loop
             if rules.lower() not in ['y', 'n']:
-                raise ValueError("Please choose only y or n.Please try again.")
+                raise ValueError("Please choose only y or n. Please try"
+                                 " again.")
 
             # If the input is valid, break out of the loop
             break
@@ -95,29 +96,29 @@ def game_rules():
     if rules.lower() == "y":
         # Print the game's rules
         print("Objective:")
-        print("Score as many points as possible by rolling dice to reach the 13")
-        print("combinations predefined in the game.\n")
+        print("Score as many points as possible by rolling dice to reach the"
+              " 13 combinations predefined in the game.\n")
         print("Game Play:")
-        print("Dice can be rolled up to three times each in a turn to make one")
-        print("of the possible scoring combinations.")
-        print("The game consists of rounds during which the player chooses")
-        print("which scoring combination to use in that round.")
-        print("Once a combination is used in the game, it cannot be used")
-        print("again.")
-        print("Player can select dice after first or second roll, and must")
-        print("score after third roll.")
-        print("After the first and second roll player can save the dice by")
-        print("choosing each dice(1 to 5) that desires to keep")
-        print("and which ones want to throw in the spots.")
-        print("Dice that are set aside from the previous rolls can be taken out")
-        print("and re-rolled again.")
+        print("Dice can be rolled up to three times each in a turn to make one"
+              " of the possible scoring combinations.")
+        print("The game consists of rounds during which the player chooses"
+              " which scoring combination to use in that round.")
+        print("Once a combination is used in the game, it cannot be used"
+              " again.")
+        print("Player can select dice after first or second roll, and must"
+              " score after third roll.")
+        print("After the first and second roll player can save the dice by"
+              " choosing each dice(1 to 5) that desires to keep"
+              " and which ones want to throw in the spots.")
+        print("Dice that are set aside from the previous rolls can be taken"
+              " out and re-rolled again.")
         print("The game ends when all categories have been scored.")
         print("The winner is the one who scores the most points.\n")
         print("Categories-combinations:")
-        print("There are thirteen predefined categories in Yahtzee game, each")
-        print("with its own unique scoring rules: ")
-        print("(1) Ones to(6) sixes: It scores the sum of these specific dice")
-        print("number only.")
+        print("There are thirteen predefined categories in Yahtzee game, each"
+              " with its own unique scoring rules: ")
+        print("(1) Ones to(6) sixes: It scores the sum of these specific dice"
+              " number only.")
         print("Three and Four of a kind: It scores the sum of all the dice.")
         print("Full house: Three of a kind & a pair|25 points.")
         print("small straight: 4 consecutive dice|30 points")
@@ -142,7 +143,7 @@ def get_user_name():
             print("")
             # Raise an exception if user doesn't enter anything
             if user_name == "":
-                raise ValueError("Please add some text. Please try again.")
+                raise ValueError("Please enter some text. Please try again.")
             break
 
         except ValueError as e:
@@ -202,8 +203,8 @@ def assign_scores(user_category, user_score, computer_category, computer_score,
 
     # Calculate total score for user and computer
     total_user = upper_score_user + upper_bonus_user + lower_score_user
-    total_computer = upper_score_computer + upper_bonus_computer
-    + lower_score_computer
+    total_computer = (upper_score_computer + upper_bonus_computer
+                      + lower_score_computer)
 
     # Update game scores with calculated values
     game_scores["UPPER SCORE"][0] = upper_score_user
@@ -257,20 +258,20 @@ def user_dices():
     for i in range(2):
         while True:
             try:
-                keep = input("Which dice would you like to keep? (e.g. 1, 3, 5"
-                            "or none) then press Enter\n")
+                keep = input("Which dice would you like to keep? (e.g. 1,3,5"
+                             " or none) then press Enter\n")
                 if keep == "":
                     user_dice = roll_dice(num_dice)
                     print("Your dice:", user_dice)
                     break
                 keep_dice = [int(k) for k in keep.split(",")]
                 if len(keep_dice) != len(set(keep_dice)):
-                    raise ValueError("You cannot choose the same dice more than"
-                                     "once. Please try again.")
+                    raise ValueError("You cannot choose the same dice more"
+                                     " than once. Please try again.")
                 if not all(0 < k <= num_dice for k in keep_dice):
                     raise ValueError("Please choose only valid dice numbers"
-                                     "between 1 and 5 separated by commas."
-                                     "Please try again.")
+                                     " between 1 and 5 separated by commas."
+                                     " Please try again.")
                 user_dice = [user_dice[k-1] for k in keep_dice]
                 + roll_dice(num_dice - len(keep_dice))
                 print("keep_dice", keep_dice)
@@ -280,7 +281,7 @@ def user_dices():
             except ValueError as e:
                 if str(e).startswith("invalid literal for int() with base 10"):
                     print(textstyle.REDBG + "Error: Please input only numeric"
-                          "values separated by commas. Please try again." +
+                          " values separated by commas. Please try again." +
                           textstyle.ENDC, "\n")
                 else:
                     print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,
@@ -306,16 +307,16 @@ def user_choice(dice):
     while True:
         try:
             choice = int(input("Which Category would you like to choose?"
-                               "(choose only one value from 1 to 13 for unscored"
-                                "categories!)\n"))
+                               " (choose only one value from 1 to 13 for"
+                               " unscored categories!)\n"))
             if not 1 <= choice <= 13:
                 raise ValueError("Please choose a number between 1 and 13."
-                                 "Please try again.")
+                                 " Please try again.")
             break
         except ValueError as e:
             if str(e).startswith("invalid literal for int() with base 10"):
                 print(textstyle.REDBG + "Error: Please input only numeric"
-                      "values between 1 and 13. Please try again." +
+                      " values between 1 and 13. Please try again." +
                       textstyle.ENDC, "\n")
             else:
                 print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,
@@ -363,8 +364,8 @@ def user_category_check(dice):
     while True:
         try:
             if game_scores[user_category][0] != "":
-                raise ValueError("This category has already been scored. Please"
-                                 "choose another category.")
+                raise ValueError("This category has already been scored."
+                                 " Please choose another category.")
             break
         except ValueError as e:
             print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC, "\n")
@@ -400,15 +401,15 @@ def calculate_score(dice, category):
         else:
             result = 0
     elif category == "(9) Full House (25)":
-        if len(set(dice)) == 2 and (dice.count(dice[0]) == 2 or
-           dice.count(dice[0]) == 3):
+        if len(set(dice)) == 2 and (dice.count(dice[0]) == 2
+           or dice.count(dice[0]) == 3):
             result = 25
         else:
             result = 0
     elif category == "(10) Small Straight (30)":
         if ({1, 2, 3, 4}.issubset(set(dice)) or
-            {2, 3, 4, 5}.issubset(set(dice)) or
-            {3, 4, 5, 6}.issubset(set(dice))):
+           {2, 3, 4, 5}.issubset(set(dice)) or
+           {3, 4, 5, 6}.issubset(set(dice))):
             result = 30
         else:
             result = 0
