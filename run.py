@@ -390,14 +390,19 @@ def end_game():
     elif user_final_score < computer_final_score:
         print(f"\nComputer won with score {computer_final_score}. Better luck next time!\n")
     else:
-        print("It's a tie!")
+        print("\nIt's a tie!\n")
+
+
+def restart_game():
+    input("Press Enter to restart game.")
+    play_game()
 
 
 def play_game():
     """
     Run all program functions.
     """
-    game_title()
+    clear_terminal()
     game_rules()
     user = get_user_name()
 
@@ -423,5 +428,6 @@ def play_game():
         print("\n")
 
     end_game()
+    restart_game()
 
 play_game()
