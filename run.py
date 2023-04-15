@@ -3,7 +3,19 @@ from prettytable import PrettyTable # import prettytable package to print a tabl
 from tabulate import tabulate # import tabulate package to print a table
 
 # list that holds all game categories
-categories = ["(1) Ones", "(2) Twos", "(3) Threes", "(4) Fours", "(5) Fives", "(6) Sixes", "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)", "(10) Small Straight (30)", "(11) Large Straight (40)", "(12) Yahtzee! (50)", "(13) Chance"]
+categories = ["(1) Ones", 
+              "(2) Twos", 
+              "(3) Threes", 
+              "(4) Fours", 
+              "(5) Fives", 
+              "(6) Sixes", 
+              "(7) Three of a Kind", 
+              "(8) Four of a Kind", 
+              "(9) Full House (25)", 
+              "(10) Small Straight (30)", 
+              "(11) Large Straight (40)", 
+              "(12) Yahtzee! (50)", 
+              "(13) Chance"]
 
 # game_scores dictionary that holds user and computer scores
 game_scores = {"(1) Ones":["",""], 
@@ -24,6 +36,13 @@ game_scores = {"(1) Ones":["",""],
                "LOWER SCORE":[0,0],
                "TOTAL":[0,0]
                }
+
+
+def game_title():
+    print("-----------------------")
+    print("Welcome to Yahtzee Game")
+    print("-----------------------\n")
+
 
 def game_rules():
     """
@@ -113,6 +132,8 @@ def assign_scores(user_category, user_score, computer_category, computer_score, 
 def clear_terminal():
     """Clears the terminal screen."""
     print("\033c", end="")
+    game_title()
+
 
 def score_table(game_scores):
     """
@@ -361,14 +382,9 @@ def play_game():
     """
     Run all program functions.
     """
-    print("-----------------------")
-    print("Welcome to Yahtzee Game")
-    print("-----------------------\n")
-
+    game_title()
     game_rules()
-
     user = get_user_name()
-
 
     for round_num in range(len(categories)):
         print(f"Round {round_num + 1}\n")
