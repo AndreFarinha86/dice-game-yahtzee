@@ -2,6 +2,25 @@ import random
 from prettytable import PrettyTable # import prettytable package to print a table
 from tabulate import tabulate # import tabulate package to print a table
 
+
+## Define a class named textstyle that contains a set of color codes for style text
+class textstyle:
+    PURPLE = '\033[95m' # purple color
+    RED = '\033[91m'    # red color
+    YELLOW = '\033[93m' # yellow color
+    CYAN = '\033[96m'   # cyan color
+    GREEN = '\033[92m'  # green color
+    BOLD = '\33[1m'     # bold text
+    ITALIC = '\33[3m'   # italicized text
+    REDBG = '\33[41m'   # red background
+    GREENBG = '\33[42m'  # green background
+    BLUEBG = '\33[44m'     # blue background
+    UNDERLINE = '\033[4m' # underlined text
+
+    ENDC = '\33[0m' # reset to default color
+
+
+
 # list that holds all game categories
 categories = ["(1) Ones", 
               "(2) Twos", 
@@ -42,9 +61,9 @@ def game_title():
     """
     Prints game title when called
     """
-    print("-----------------------")
-    print("Welcome to Yahtzee Game")
-    print("-----------------------\n")
+    print(textstyle.YELLOW + "-----------------------" + textstyle.ENDC)
+    print(textstyle.BOLD + textstyle.ITALIC + textstyle.YELLOW + "Welcome to Yahtzee Game" + textstyle.ENDC)
+    print(textstyle.YELLOW + "-----------------------" + textstyle.ENDC)
 
 
 def game_rules():
@@ -53,14 +72,14 @@ def game_rules():
     """
     while True:
         try:
-            rules = input("Would you like to see the game rules? Choose (y/n) and press enter:")
+            rules = input("Would you like to see the game rules? Choose (y/n) then press Enter:")
             print("")
             if rules.lower() not in ['y', 'n']:
-                raise ValueError("Please choose only y or n. Please try again.\n")
+                raise ValueError("Please choose only y or n. Please try again.")
             break
 
         except ValueError as e:
-                print("Error:", str(e), "\n")
+                print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
 
     if rules.lower() == "y":
         print("Objective:")
@@ -103,7 +122,7 @@ def get_user_name():
             break
 
         except ValueError as e:
-                print("Error:", str(e), "\n")
+                print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
 
     return user_name
 
@@ -169,7 +188,7 @@ def score_table(game_scores, user):
 
 def roll_dice(num_dice):
     """
-    Rolls dices and returns a list of their values
+    Rolls dice and returns a list of their values
     """
     dice = [random.randint(1, 6) for i in range(num_dice)]
     return dice
@@ -181,41 +200,41 @@ def user_dices():
     """
     num_dice = 5
     user_dice = roll_dice(num_dice)
-    print("Your dices:", user_dice)
+    print("Your dice:", user_dice)
     for i in range(2):
         while True:
             try:
-                keep = input("Which dices would you like to keep? (e.g. 1,3,5 or none) then press Enter\n")
+                keep = input("Which dice would you like to keep? (e.g. 1,3,5 or none) then press Enter\n")
                 if keep == "":
                     user_dice = roll_dice(num_dice)
-                    print("Your dices:", user_dice)
+                    print("Your dice:", user_dice)
                     break
                 keep_dice = [int(k) for k in keep.split(",")]
                 if len(keep_dice) != len(set(keep_dice)):
-                    raise ValueError("You cannot choose the same dice more than once. Please try again.\n")
+                    raise ValueError("You cannot choose the same dice more than once. Please try again.")
                 if not all(0 < k <= num_dice for k in keep_dice):
-                    raise ValueError("Please choose only valid dice numbers between 1 and 5 separated by commas. Please try again.\n")
+                    raise ValueError("Please choose only valid dice numbers between 1 and 5 separated by commas. Please try again.")
                 user_dice = [user_dice[k-1] for k in keep_dice] + roll_dice(num_dice - len(keep_dice))            
                 print("keep_dice", keep_dice)
-                print("Your dices:", user_dice,"\n")
+                print("Your dice:", user_dice,"\n")
                 break
 
             except ValueError as e:
                 if str(e).startswith("invalid literal for int() with base 10"):
-                    print("Error: Please input only numeric values separated by commas. Please try again.\n")
+                    print(textstyle.REDBG + "Error: Please input only numeric values separated by commas. Please try again." + textstyle.ENDC,"\n")
                 else:
-                    print("Error:", str(e), "\n")
-    print("Your Final Dices:", user_dice, "\n")
+                    print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
+    print("Your Final Dice:", user_dice, "\n")
     return user_dice
 
 
 def computer_dices():
     """
-    Calculates and returns the computer dices
+    Calculates and returns the computer dice
     """
     num_dice = 5
     computer_dice = roll_dice(num_dice)
-    print("Computer dices:", computer_dice, "\n")
+    print("Computer dice:", computer_dice, "\n")
     return computer_dice
 
 
@@ -227,13 +246,13 @@ def user_choice(dice):
         try:
             choice = int(input("Which Category would you like to choose? (choose only one value from 1 to 13 for unscored categories!)\n"))
             if not 1 <= choice <= 13:
-                raise ValueError("Please choose a number between 1 and 13. Please try again.\n")
+                raise ValueError("Please choose a number between 1 and 13. Please try again.")
             break
         except ValueError as e:
             if str(e).startswith("invalid literal for int() with base 10"):
-                print("Error: Please input only numeric values between 1 and 13. Please try again.\n")
+                print(textstyle.REDBG + "Error: Please input only numeric values between 1 and 13. Please try again." + textstyle.ENDC,"\n")
             else:
-                print("Error:", str(e), "\n")
+                print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
             
     if choice == 1:
         user_category = "(1) Ones"
@@ -280,7 +299,7 @@ def user_category_check(dice):
                 raise ValueError("This category has already been scored. Please choose another category.")
             break
         except ValueError as e:
-                print("Error:", str(e), "\n")
+                print(textstyle.REDBG + "Error:", str(e) + textstyle.ENDC,"\n")
                 user_category = user_choice(dice)
     
     return user_category
@@ -288,7 +307,7 @@ def user_category_check(dice):
 
 def calculate_score(dice, category):
     """
-    Calculates and returns the score for each category based on the given dices
+    Calculates and returns the score for each category based on the given dice
     """
     if category == "(1) Ones":
         result = dice.count(1)
@@ -351,10 +370,10 @@ def display_score(dice):
         if score != 0:
             scores.append([category, score])
     if scores:
-        print("Possible Scores:")
+        print(textstyle.BLUEBG + "Possible Scores:" + textstyle.ENDC)
         print(tabulate(scores, headers=["Category", "Score"]),"\n")
     else:
-        print("All possible scores are 0, please choose one of the unscored categories!\n")
+        print(textstyle.BLUEBG + "All possible scores are 0, please choose one of the unscored categories!" + textstyle.ENDC ,"\n")
 
 
 def computer_choice(dice):
@@ -372,8 +391,7 @@ def computer_choice(dice):
            computer_score = score
            computer_category = category
     
-    print("Computer chose:", computer_category)
-    print("With score:", computer_score, "\n")
+    print("Computer chose: " + textstyle.UNDERLINE + f"{computer_category}" + textstyle.ENDC + " | With score: " + textstyle.UNDERLINE + f"{computer_score}" + textstyle.ENDC + "\n")
     return computer_category
 
 
@@ -382,15 +400,15 @@ def end_game(user):
     Ends the game by printing the final scores and a message indicating the winner.
     """
 
-    print("Game over!\n")
+    print(textstyle.BOLD + textstyle.GREENBG + "Game over!" + textstyle.ENDC,"\n")
     computer_final_score = game_scores["TOTAL"][1]
     user_final_score = game_scores["TOTAL"][0]
     if user_final_score > computer_final_score:
-        print(f"\nCongratulations {user}! You won! with score {user_final_score}\n")
+        print(f"Congratulations {user}! You won! with score: " + textstyle.UNDERLINE + f"{user_final_score}" + textstyle.ENDC + ".\n")
     elif user_final_score < computer_final_score:
-        print(f"\nComputer won with score {computer_final_score}. Better luck next time!\n")
+        print("Computer won with score: " + textstyle.UNDERLINE + f"{computer_final_score}" + textstyle.ENDC + ". Better luck next time!\n")
     else:
-        print("\nIt's a tie!\n")
+        print("It's a tie!\n")
 
 
 def restart_game():
@@ -407,16 +425,16 @@ def play_game():
     user = get_user_name()
 
     for round_num in range(len(categories)):
-        print(f"Round {round_num + 1}\n")
+        print(textstyle.BOLD + textstyle.PURPLE + f"Round {round_num + 1}\n" + textstyle.ENDC)
 
         # Computer's turn
-        print("It's the computer's turn.\n")
+        print(textstyle.CYAN + "It's the computer's turn.\n" + textstyle.ENDC)
         computer_dice = computer_dices()
         computer_category = computer_choice(computer_dice)
         computer_score = calculate_score(computer_dice, computer_category)
 
         # User's turn
-        print(f"It's {user} turn!\n")
+        print(textstyle.GREEN + f"{user}, It's your turn!\n" + textstyle.ENDC)
         user_dice = user_dices()
         display_score(user_dice)
         user_category = user_category_check(user_dice)
