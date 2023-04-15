@@ -39,6 +39,9 @@ game_scores = {"(1) Ones":["",""],
 
 
 def game_title():
+    """
+    Prints game title when called
+    """
     print("-----------------------")
     print("Welcome to Yahtzee Game")
     print("-----------------------\n")
