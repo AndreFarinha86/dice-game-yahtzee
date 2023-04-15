@@ -20,7 +20,6 @@ class textstyle:
     ENDC = '\33[0m' # reset to default color
 
 
-
 # list that holds all game categories
 categories = ["(1) Ones", 
               "(2) Twos", 
