@@ -400,12 +400,12 @@ def calculate_score(dice, category):
     elif category == "(6) Sixes":
         result = 6 * dice.count(6)
     elif category == "(7) Three of a Kind":
-        if len(set(dice)) <= 3:
+        if len(set(dice)) >= 3 and any(dice.count(d) >= 3 for d in dice):
             result = sum(dice)
         else:
             result = 0
     elif category == "(8) Four of a Kind":
-        if len(set(dice)) <= 4:
+        if len(set(dice)) <= 2 and any(dice.count(d) >= 4 for d in dice):
             result = sum(dice)
         else:
             result = 0
