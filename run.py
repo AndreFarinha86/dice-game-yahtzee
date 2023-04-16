@@ -404,7 +404,7 @@ def calculate_score(dice, category):
         else:
             result = 0
     elif category == "(8) Four of a Kind":
-        if len(set(dice)) <= 2:
+        if len(set(dice)) <= 1:
             result = sum(dice)
         else:
             result = 0
@@ -421,7 +421,7 @@ def calculate_score(dice, category):
             result = 30
         else:
             result = 0
-    elif category == "(11) Large Straight":
+    elif category == "(11) Large Straight (40)":
         if set(dice) == {1, 2, 3, 4, 5} or set(dice) == {2, 3, 4, 5, 6}:
             result = 40
         else:
