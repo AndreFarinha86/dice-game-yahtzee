@@ -29,7 +29,7 @@ If a player rolls a Yahtzee, they can score 50 points in the Yahtzee category, b
 
 4. [Features](#features)
     * [Existing Features](#existing-features)
-    * [Future Features](#future-features)
+    * [Potential Future Features](#potential-future-features)
 
 5. [Data Model](#data-model)
 
