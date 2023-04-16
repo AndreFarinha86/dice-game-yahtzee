@@ -300,38 +300,39 @@ Before deploying the project to Heroku, the following packages were included in 
 - tabulate==0.9.0
 
 The deployment steps in Heroku app are as follows:
-    1. Git add and git commit all changes made;
-
-    2. Log into [Heroku](https://dashboard.heroku.com/) or create a new account and log in;
-
-    3. top right-hand corner click "New" and choose the option Create new app, if you are a new user, the "Create new app" button will appear in the middle of the screen;
-
-    4. Write app name - it has to be unique, it cannot be the same as this app;
-
-    5. Choose Region - I am in Europe;
-
-    6. Click "Create App" The page of your project opens;
-
-    7.  Choose "settings" from the menu on the top of the page;
-
-    8. Go to section "Config Vars" and click the button "Reveal Config Vars";
-
-    9. In the field for "KEY" enter "PORT"-  capital letters and value"8000";
-
-    10. Go to section "Build packs" and click "Add build pack":
-
-        * in this new window - click Python and "Save changes" [`Heroku/Python`]
-        * click "Add build pack" again
-        * in this new window - click Node.js and "Save changes" [`Heroku/NodeJS`]
-        * take care to have those apps in this order: [`Python`] first, [`Node.js`] second, drag and drop if needed
-
-    11. Next go to "Deploy" in the menu bar on the top;
-
-    12. Go to section "deployment method", choose "GitHub";
     
-    13. Link the Heroku app to the repository by clicking search in the connect to GitHUb section and choose the relevant github repository;
+1. Git add and git commit all changes made;
 
-    14. Click on Automatic deploys or manual deploy depending on preference. Automatic deploy was chosen for this project;
+2. Log into [Heroku](https://dashboard.heroku.com/) or create a new account and log in;
+
+3. top right-hand corner click "New" and choose the option Create new app, if you are a new user, the "Create new app" button will appear in the middle of the screen;
+
+4. Write app name - it has to be unique, it cannot be the same as this app;
+
+5. Choose Region - I am in Europe;
+
+6. Click "Create App" The page of your project opens;
+
+7.  Choose "settings" from the menu on the top of the page;
+
+8. Go to section "Config Vars" and click the button "Reveal Config Vars";
+
+9. In the field for "KEY" enter "PORT"-  capital letters and value"8000";
+
+10. Go to section "Build packs" and click "Add build pack":
+
+    * in this new window - click Python and "Save changes" [`Heroku/Python`]
+    * click "Add build pack" again
+    * in this new window - click Node.js and "Save changes" [`Heroku/NodeJS`]
+    * take care to have those apps in this order: [`Python`] first, [`Node.js`] second, drag and drop if needed
+
+11. Next go to "Deploy" in the menu bar on the top;
+
+12. Go to section "deployment method", choose "GitHub";
+    
+13. Link the Heroku app to the repository by clicking search in the connect to GitHUb section and choose the relevant github repository;
+
+14. Click on Automatic deploys or manual deploy depending on preference. Automatic deploy was chosen for this project;
 
 
 - The GitHub repository can be found [here](https://github.com/AndreFarinha86/dice-game-yahtzee)
