@@ -21,8 +21,10 @@ If a player rolls a Yahtzee, they can score 50 points in the Yahtzee category, b
 ## Table of Contents
 
 1. [How To play](#how-to-play)
-2. [User Experience (UX)](#user-experience)
+
+2. [User Experience (UX)](#user-experience-ux)
     * [Goals](#goals)
+
 3. [Logic Flowchart](#logic-flowchart)
 
 4. [Features](#features)
@@ -31,12 +33,14 @@ If a player rolls a Yahtzee, they can score 50 points in the Yahtzee category, b
 
 5. [Data Model](#data-model)
 
-5. [Testing](#testing)
-    * [Solved Bugs](#solved-bugs)
+6. [Testing](#testing)
     * [Validator testing](#validator-testing)
+    * [Bugs](#Bugs)
     * [Unfixed bugs](#unfixed-bugs)
-5. [Deployment](#deployment)
-6. [Credits](#credits)
+
+7. [Deployment](#deployment)
+
+8. [Credits](#credits)
     * [Code](#code)
     * [Acknowledgements](#acknowledgements)
 
@@ -256,17 +260,9 @@ In this project the following technologies have been used.
     - Given invalid and incorrect inputs.
     - Tested in local terminal and the code institute Heroku terminal.
 
-Testing was performed on all incorrect player input...
 
-Along the development of the project regular testing were carried out. And the pages were reloaded several times after each addition and modification.
+Along the development of the project regular testing were carried out. Bugs, syntax and logic errors encountered during development were solved through using print statements and testing along the way at every stage!
 
-1. This website is responsive to all screens sizes down to 280px wide and was tested by using the devtools device toolbar for different devices.
-
-2. The navigation buttons were tested and all work well.
-
-3. Modals were tested and all work well and are responsive to different screen sizes.
-
-4. All game leves were tested and all work well, cards are flipping, keep revealed if it matches and hide if it doesn't, moves are increasing with each flipped card and time is counting down. Gameover Modal is popping when time is finished before all cards are revealed and win modal is popping when all card are revealed before time is finished. When the reset button is clicked, moves will reset to zero, revealed cards will be hidden, and time will reset to initial.
 
 
 ### Validator Testing
@@ -278,9 +274,6 @@ All identified errors were rectified.
 Currently there are no errors meeting all PEP8 requirements according to this validator:
 
 ![PEP8 Python Validator](assets/images/PEP8-Python-Validator.png)
-
-5. The website code was both tested, manually and automatically (using the URL link) for HTML and CSS, through W3C Markup Validator and W3C CSS Validator Services, and  manually tested for JavaScript through JSHint which were used to validate the project and to ensure there were no syntax errors in the project.
-
 
 
 
@@ -306,8 +299,7 @@ Before deploying the project to Heroku, the following packages were included in 
 - prettytable==3.7.0
 - tabulate==0.9.0
 
-
-- The deployment steps in Heroku app are as follows:
+The deployment steps in Heroku app are as follows:
     1. Git add and git commit all changes made;
 
     2. Log into [Heroku](https://dashboard.heroku.com/) or create a new account and log in;
