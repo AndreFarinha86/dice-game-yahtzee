@@ -193,13 +193,21 @@ def assign_scores(user_category, user_score, computer_category, computer_score,
 
     # Calculate lower score for user and computer
     lower_score_user = sum(game_scores[key][0] for key in [
-        "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)",
-        "(10) Small Straight (30)", "(11) Large Straight (40)",
-        "(12) Yahtzee! (50)", "(13) Chance"] if game_scores[key][0])
+                           "(7) Three of a Kind",
+                           "(8) Four of a Kind",
+                           "(9) Full House (25)",
+                           "(10) Small Straight (30)",
+                           "(11) Large Straight (40)",
+                           "(12) Yahtzee! (50)",
+                           "(13) Chance"] if game_scores[key][0])
     lower_score_computer = sum(game_scores[key][1] for key in [
-        "(7) Three of a Kind", "(8) Four of a Kind", "(9) Full House (25)",
-        "(10) Small Straight (30)", "(11) Large Straight (40)",
-        "(12) Yahtzee! (50)", "(13) Chance"] if game_scores[key][1])
+                               "(7) Three of a Kind",
+                               "(8) Four of a Kind",
+                               "(9) Full House (25)",
+                               "(10) Small Straight (30)",
+                               "(11) Large Straight (40)",
+                               "(12) Yahtzee! (50)",
+                               "(13) Chance"] if game_scores[key][1])
 
     # Calculate total score for user and computer
     total_user = upper_score_user + upper_bonus_user + lower_score_user
