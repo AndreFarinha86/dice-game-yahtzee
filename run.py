@@ -281,9 +281,9 @@ def user_dices():
                     raise ValueError("Please choose only valid dice numbers"
                                      " between 1 and 5 separated by commas."
                                      " Please try again.")
-                user_dice = ([user_dice[k-1] for k in keep_dice]
-                             + roll_dice(num_dice - len(keep_dice)))
-                print("kept dice:", [user_dice[k-1] for k in keep_dice])
+                kept_dice = [user_dice[k-1] for k in keep_dice]
+                user_dice = (kept_dice + roll_dice(num_dice - len(keep_dice)))
+                print("Kept dice:", kept_dice)
                 print("Your dice:", user_dice, "\n")
                 break
 
