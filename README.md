@@ -18,171 +18,196 @@ If a player rolls a Yahtzee, they can score 50 points in the Yahtzee category, b
 
 ---
 
+## Table of Contents
+
+1. [How To play](#how-to-play)
+2. [User Experience (UX)](#user-experience)
+    * [Goals](#goals)
+3. [Logic Flowchart](#logic-flowchart)
+
+4. [Features](#features)
+    * [Existing Features](#existing-features)
+    * [Future Features](#future-features)
+
+5. [Data Model](#data-model)
+
+5. [Testing](#testing)
+    * [Solved Bugs](#solved-bugs)
+    * [Validator testing](#validator-testing)
+    * [Unfixed bugs](#unfixed-bugs)
+5. [Deployment](#deployment)
+6. [Credits](#credits)
+    * [Code](#code)
+    * [Acknowledgements](#acknowledgements)
+
+
+---
+
+## How to Play
+
+More information aboout the Yahtzee dice game can be found in [wikipedia](https://en.wikipedia.org/wiki/Yahtzee)
+
+In this version, the player has the possibility to view the game rules before the game starts.
+
+It is required for the player to enter a name before the game begins.
+
+Then the game will start with 13 rounds where, in each round, first the computer data, the category chosen by the computer, and the associated score will be displayed.
+
+Second, 5 dice will be randomly allocated and displayed to the player, where the player can choose which dice to keep.
+
+The skipped dice will be randomly allocated and displayed to the player, and the player can choose whether or not to keep all dice.
+
+The player has 3 attempts to build the final dice.
+
+Once the player reaches the final dice, a table will be displayed showing the possible score combinations, and the player will be required to choose one of the unscored categories.
+
+The game will continue until all categories are scored.
+
+At the end, a game over message will be displayed informing who the winner is (computer or player) by displaying the final score.
+
+---
+
 
 ## User Experience (UX)
 
-This project is designed for all users who like to have fun, play interactive games, test and exercise his memory skills. The game was thought and designed for 3 different difficulty levels, where the allowed playing time is reduced and the number of cards increases as the game level gets more difficult.
+This project is designed for all users who like to have fun, play interactive games, test and exercise their logic, strategy and probability skills. The game was thought and designed for the user to play against the computer.
 
 ### Goals
 
 #### *First Time users*
 
-- As a first-time, the aim is for the user to easily navigate around the website intuitively, to have access to the tutorial information if needed,  and be able to easily understand the game rules.
-- As a first-time, the aim is for the user to easily access the game area, to be able to choose the game's difficulty level before starting to play and to have an understanding of what will change at each difficulty level.
-- As a first-time, the aim is for the user to have fun, test, challenge and improve the memory skills and gain a taste and interest in this type of didactic memory games.
-- As a first-time, the aim is for the user to be able to keep track of the amount of flips it has taken to complete the game and the time taken to do so as this can give a personal challenge to beat it on any further play-throughs.
+- For the first time, the goal is for the user to easily interact with the program in an intuitive way, to understand easily what information to enter when requested, and be able to easily understand the game rules.
 
 
 #### *Returning users*
 
-- As a returning, the aim is for the user to stay motivated and keep playing to complete and win each game level in the shortest time and moves (flipped cards) as possible, improving the memory skills.
+- As a returning, the aim is for the user to stay motivated and keep playing to complete the game with highest score as possible, improving the logic, strategy and probability skills.
 
 ---
 
 
-### Design
+## Logic Flowchart
 
-- The background was designed with neutral colors to avoid distractions and focus on the main content.
+This flowchart tracks the basic steps and checks the program must make to run based on each of the user's potential requirements and inputs.
 
-- Buttons were designed with hover style by changing the button backgroung and font color when user is over them.
+The flowchart was built using [lucidchart website](https://www.lucidchart.com)
 
-- Modals were designed with whole background behind in dark color to allows the user to focus in Modal content.
+![flowchart](assets/images/Flowcharts.png)
 
-- The title of the game has 2 Font Awesome baby icons at the beginning and end to emphasize the theme of the game.
-
-- The predominant color of the website is pink due to the main theme of the game - Baby Girl
-
-- Typography
-
-    - For game title the 'Yellowtail' font was chosen with Sans Serif as the fallback font in case for any reason the font isn't being imported into the site correctly.
-    - For all buttons the 'Heebo' font was chosen  with Sans Serif as the fallback font in case for any reason the font isn't being imported into the site correctly.
-    - For text in general in whole website the 'montserrat' font was chosen with Sans Serif as the fallback font in case for any reason the font isn't being imported into the site correctly
-
-
- ---
-
-### Wireframe
-
-The Wireframe [balsamiq](https://balsamiq.com/) was used initially to draft and develop the website design in a responsive way:
-
-1. Index - Game Home Page
-
-![Home page wireframe](assets/images/read-me-wireframe1.png)
-
-2. Game level selection menu
-
-![Our brands Page wireframe](assets/images/read-me-wireframe2.png)
-
-3. Game tutorial and rules pop up
-
-![Wine tours Page wireframe](assets/images/read-me-wireframe3.png)
-
-4. Game area for Beginner Level
-
-![Wine club Page wireframe](assets/images/read-me-wireframe4.png)
-
-5. Game area for Intermediate Level
-
-![Wine club Page wireframe](assets/images/read-me-wireframe5.png)
-
-6. Game area for Advanced Level
-
-![Wine club Page wireframe](assets/images/read-me-wireframe6.png)
 
 ---
 
 ## Features
 
-- The Babies Matching Game website project was designed to responsive respond to different screen sizes down to 280px wide .
+### Existing Features
 
-1. **Header**
+1. **Title and Rules option**
 
-- Featured at the top of the page, the header shows the game name: Babies Matching Game in a different font and 2 icons included at beginning and the end.
-- This header clearly tells the user what his is playing. 
+- At the start of the program a welcome message will be displayed showing the game title.
 
-![Game title](assets/images/read-me-features1.png)
+- Then a user input "y or n" will be required (can be uppercase or lowercase). The user can enter "y" for yes if he decides to check the game rules before the game starts or "n" to not view the game rules and allow the program to proceed to the game interface.
 
-2. **Home Page**
+![Game title and rules option](assets/images/features01.png)
 
-- The website has 2 pages, the home page that will launched once the website is loaded and the Game arae page that initial is hidden and will be launched once the user has choiced the desired level.
 
-- The home page has a baby image to provide to the user an idea of website theme and 2 buttons (Play and Rules) that will pop up a modal with different information when the user click on it.
+- If the user enters invalid input, none of "y" or "n", an error will be displayed and new input will be required from the user.
 
-![Home page](assets/images/read-me-features2.png)
+![Rules error](assets/images/features02.png)
 
-3. **Game Rules Modal**
 
-- When the user clicks on the Rules button, a Modal will appear showing the rules of the game.
 
-- The user can leave the modal and return to home page by clicking in the cross "X" button or simply by clicking outside of the modal area.
+2. **Rules Display**
 
-![Rules Modal](assets/images/read-me-features3.png)
+- If the user enters "y" to check the game rules, the rules will be displayed.
 
-4. **Game Level choice Model**
+![Rules display](assets/images/features03.png)
 
-- When the user clicks on the Play button, a Modal will appear showing 3 different buttons for each game level.
 
-- Here the user can choose the desired game level, and when clicking on one of the buttons the game page will be launched with the selected game level.
+- Then if user press enter, the rules will be clear from terminal and inicial question ("Would you like to see the game rules? Choose (y/n) then press Enter:") will be displayed.
 
-- The user also can leave the modal and return to home page by clicking in the cross "X" button or simply by clicking outside of the modal area.
+![Game title and rules option](assets/images/features01.png)
 
-![Game Level Modal](assets/images/read-me-features4.png)
 
-5. **Navigation Menu**
 
-- In the game page has at top, right below the game title, 2 buttons (reset and quit)
+3. **Name input**
 
-- When clicking on the reset button, the user will restart the game returning to the default parameters, that is, all the revealed cards will be hidden again, the moves will be zeroed and the time will return to the initial time.
+- When user enter "n" in the first required input and second input will be displayed for user to enter name or any characters. It is required to the user to enter any text or characters.
 
-- By clicking on the quit button, the user returns to the home page, where he can check or review the game rules or choose another game level.
+![Name input](assets/images/features04.png)
 
-![Navigation Menu](assets/images/read-me-features5.png)
 
-6. **Game Display**
+- If user just simply press enter without entering any characters an error message will be displayed requesting to the user to enter some text.
 
-- Betewen the navigation menu and the game board is located the game displey, where the user will be informed of the accumulated moves by turning over each card and the initial or remaining game time to end the game.
+![Name error](assets/images/features05.png)
 
-![Game Display](assets/images/read-me-features6.png)
 
-7. **Beginner Game board**
 
-- When the user clicks and chooses the Beginner game level, a game page will open with 8 different cards pairs hidden and an allowed game time of 3 minutes.
+4. **Game start**
 
-- The user will be able to play by turning over one pair of cards at a time to see if the pair matches or not until all cars are revealed or game time is over.
+- After user input name and press enter, game will start running by displaying round 1, computer game information, random dice, chosen category and associated score.
 
-![Beginner Game board](assets/images/read-me-features7.png)
+- Then 5 random dice will be allocated and displayed to the user. Here the user has the opportunity in 2 attempts to keep and skip dices in order to try to get the best and desired dice combination.
 
-8. **Intermediate Game board**
+- 2 inputs will be sequentially display requesting for user to enter valid and desired information.
 
-- When the user clicks and chooses the Beginner game level, a game page will open with 10 different cards pairs hidden and an allowed game time of 2 minutes.
+![Game start](assets/images/features06.png)
 
-- The user will be able to play by turning over one pair of cards at a time to see if the pair matches or not until all cars are revealed or game time is over.
 
-![Intermediate Game board](assets/images/read-me-features8.png)
+- If user inputs not valid data, 2 errors can appear. One for non-numeric characters and the other for numeric characters outside the range of numbers 1 to 5, referring to the position of each dice. 
 
-9. **Advanced Game board**
+![Dice input error](assets/images/features07.png)
 
-- When the user clicks and chooses the Beginner game level, a game page will open with 12 different cards pairs hidden and an allowed game time of 1 minutes.
 
-- The user will be able to play by turning over one pair of cards at a time to see if the pair matches or not until all cars are revealed or game time is over.
+- Once user reach to the final dice a table will be displayed showing the possible score from the final dice combination for unscored categories only.
 
-![Advanced Game board](assets/images/read-me-features9.png)
+- Then an input will be displayed for user to choose and enter one of the unscored categories, it could be one of the suggested categories in the possible scoring table or another unscored category with 0 score.
 
-10. **Game over Modal**
+![Final dice](assets/images/features08.png)
 
-- When the allowed playing time for each level is up before all the cards are revealed a modal will pop up informing the user that the the time has ran out and the game is over.
 
-- The Game over Modal has Quit button that allows user to return to home page.
+- If the dice combination gives only a 0 score for remaining unscored categories, a message will be displayed instead of the possible score table.
 
-![Game over Modal](assets/images/read-me-features10.png)
+![possible scores](assets/images/features11.png)
 
-11. **Win Modal**
 
-- When all the cards of each level are revealed before the time runs out, a modal will pop up congratulating the user and informing that the game is won.
+- If the user enters invalid information, one of the following errors may appear:
+    - For non numeric values. 
+    - For numeric values out of the range 1 to 13. 
+    - For numeric values within range 1 to 13 but category is scored already.
 
-- The Win Modal has Quit button that allows user to return to home page.
+![Category input error](assets/images/features09.png)
 
-![Win Modal](assets/images/read-me-features11.png)
+
+- Once the user has chosen a valid category, all previous information will be erased from the terminal and a table will be displayed showing the scores of the categories already scored in each stage of the game and the sum of all the scores of the user and the computer.
+
+![Score table](assets/images/features10.png)
+
+
+5. **Game end**
+
+- The game will run progressively until the entire score table is filled.
+
+- Once the score table is completed a game over message will appear informing the game is over and who is the winner.
+
+![Score table](assets/images/features12.png)
+
+### Potential Future Features
+
+- Computer to be more capable of making wiser decisions in each category to choose from in order to increase the difficulty of the game.
+
+---
+
+## Data Model
+
+
+The following table model was adopted to store the user and computer scores of each category as the game progressed and to give the user a clear view of the score achived by both players (user and computer).
+
+Scores are kept in a dictionary and displayed through a table in the terminal using the print method.
+
+![Score table](assets/images/features13.png)
+
+![Score table](assets/images/features12.png)
+
 
 ---
 
@@ -192,36 +217,46 @@ In this project the following technologies have been used.
 
 ### Languages Used
 
--   [HTML5](https://en.wikipedia.org/wiki/HTML5) used for basic content and structure of the website.
--   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) used for style and design.
--   [JavaScript](https://en.wikipedia.org/wiki/JavaScript) used for logic structure of the game.
+- [Python](https://www.python.org/) used for logic structure of the game.
 
-### Frameworks, Libraries & Programs Used
+### Other Technologies, Frameworks & Libraries
 
-- [Google Fonts:](https://fonts.google.com/)
-    - Google fonts were used to import the 'Yellowtail' font for Game title, 'Heebo' font for buttons and 'montserrat' font  for text in general into the style.css file which is used on all pages throughout the project.
+#### Native Modules & Libaries
 
-- [Font Awesome:](https://fontawesome.com/)
-    - Font Awesome was used on website title to add icons for aesthetic.
+- [Random](https://docs.python.org/3/library/random.html)
+    - Used to provide random dice
 
-- [Hover.css:](https://ianlunn.github.io/Hover/)
-    - Hover.css was used on the buttons to add the float transition while being hovered over.
+
+#### External Modules & Libraries
+
+- [Prettytable](https://pypi.org/project/prettytable/)
+    - Used to create score table
+
+- [Tabulate](https://pypi.org/project/tabulate/)
+    - Used to create possible score table
 
 - [Git](https://git-scm.com/)
-    - Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
+    - Used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
 
 - [GitHub:](https://github.com/)
-    - GitHub is used to store the projects code after being pushed from Git.
+    - Used to store the projects code after being pushed from Git.
 
-- [Balsamiq:](https://balsamiq.com/)
-    - Balsamiq was used to create the wireframes during the design process.
+- [Heroku](https://dashboard.heroku.com/)
+    - Used to deploy project
 
-- [Google Chrome Development Tools:](https://developer.chrome.com/docs/devtools/)
-    - Google Chrome Development Tools was used for testing code on various device sizes during development and debugging.
+- [lucidchart website](https://www.lucidchart.com)
+    - Used to create logic flow chart
 
 ---
 
 ## Testing
+
+- The program was manually tested by doing the following:
+    - Passed the code through a PEP8 linter and confirmed there are no errors.
+    - Given invalid and incorrect inputs.
+    - Tested in local terminal and the code institute Heroku terminal.
+
+Testing was performed on all incorrect player input...
 
 Along the development of the project regular testing were carried out. And the pages were reloaded several times after each addition and modification.
 
@@ -236,44 +271,23 @@ Along the development of the project regular testing were carried out. And the p
 
 ### Validator Testing
 
+The Python files have been ran through a [PEP8 Python Validator](https://pep8ci.herokuapp.com/) 
+
+All identified errors were rectified.
+
+Currently there are no errors meeting all PEP8 requirements according to this validator:
+
+![PEP8 Python Validator](assets/images/PEP8-Python-Validator.png)
+
 5. The website code was both tested, manually and automatically (using the URL link) for HTML and CSS, through W3C Markup Validator and W3C CSS Validator Services, and  manually tested for JavaScript through JSHint which were used to validate the project and to ensure there were no syntax errors in the project.
 
-- HTML
-    - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/) - [Results](https://validator.w3.org/nu/?doc=https%3A%2F%2Fandrefarinha86.github.io%2FBabies-match-game%2F)
 
-- CSS
-    - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fandrefarinha86.github.io%2FBabies-match-game%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
-
-- JavaScript
-    - No errors were found when passing through the official [(JSHint) validator](https://jshint.com/) and the following metrics were returned:
-        - There are 21 functions in this file.
-        - Function with the largest signature take 2 arguments, while the median is 0.
-        - Largest function has 13 statements in it, while the median is 4.
-        - The most complex function has a cyclomatic complexity value of 5 while the median is 1.
-        
-        - 49 warnings
-        
-        - One unused variable
-
-6. Lighthouse Testing - Accessibility 
- - The chosen colors and fonts were confirmed that are easy and accessible by running it through lighthouse in devtools.
-    - Lighthouse Mobile
-
-    ![Mobile lighthouse report](assets/images/read-me-lighthouse-report-mobile.png)
-
-    The performance is not great on mobiles due to the format of the images used on the website.
-
-    - Lighthouse Desktop
-
-    ![Desktop lighthouse report](assets/images/read-me-lighthouse-report-desktop.png)
 
 
 ### Bugs
 
-- Along the website development bugs were identified and resolved with assistance of Devtools.
+- Along the project development bugs were identified and resolved by using the print method in local terminal.
 
-- When the project was deployed to GitHub Pages I have noticed that images for the card front faces weren't loaded, the front faces being empty when cards flipped. With the help of my mentor and Devtools support we figured out that the error was that the file paths was incorrect:
-"../assets/images" supposed to be "./assets/images"
 
 ### Unfixed Bugs
 
