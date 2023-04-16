@@ -266,7 +266,8 @@ def user_dices():
     for i in range(2):
         while True:
             try:
-                keep = input("Which dice would you like to keep? (e.g. 1,3,5"
+                keep = input("Which dice would you like to keep? choice dice"
+                             " position (e.g. 1,3,5"
                              " or none) then press Enter\n")
                 if keep == "":
                     user_dice = roll_dice(num_dice)
@@ -282,7 +283,7 @@ def user_dices():
                                      " Please try again.")
                 user_dice = ([user_dice[k-1] for k in keep_dice]
                              + roll_dice(num_dice - len(keep_dice)))
-                print("keep_dice", keep_dice)
+                print("kept dice:", [user_dice[k-1] for k in keep_dice])
                 print("Your dice:", user_dice, "\n")
                 break
 
